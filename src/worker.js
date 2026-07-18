@@ -4,6 +4,7 @@
    truncated client-side), and caches the assembled JSON at the edge. */
 
 const FEED_URL = 'https://news.google.com/rss/search?q=%22matsunori%22&hl=en-US&gl=US&ceid=US:en';
+const BING_URL = 'https://www.bing.com/news/search?q=%22matsunori%22&format=rss&mkt=en-US';
 const CACHE_SECONDS = 14400; // 4h — press cadence, not a ticker
 const ENRICH_LIMIT = 12;     // resolve+og-scrape at most N articles per rebuild
                              // (up to 3 subrequests each — stay inside the 50/request budget)
@@ -20,7 +21,7 @@ export default {
 
 async function news(request, ctx) {
   const cache = caches.default;
-  const key = new Request(new URL('/api/news?v=2', request.url));
+  const key = new Request(new URL('/api/news?v=4', request.url));
   const hit = await cache.match(key);
   if (hit) return hit;
 
@@ -28,7 +29,7 @@ async function news(request, ctx) {
   try {
     body = await buildFeed();
   } catch (err) {
-    body = { error: 'feed-unavailable', items: [] };
+    body = { error: 'feed-unavailable', detail: String((err && err.message) || err), items: [] };
     ttl = 300; // transient failure: retry soon
   }
   const res = new Response(JSON.stringify(body), {
@@ -41,9 +42,57 @@ async function news(request, ctx) {
   return res;
 }
 
+/* Google News has the best coverage but 503s datacenter egress at times;
+   Bing News RSS carries real publisher URLs, snippets, and thumbnails inline.
+   Try Google first, fall through to Bing. */
 async function buildFeed() {
-  const r = await fetch(FEED_URL, {
+  let out = null;
+  try { out = await fromGoogle(); } catch (e) { out = null; }
+  if (!out || !out.items.length) out = await fromBing();
+  return out;
+}
+
+async function fromBing() {
+  const r = await fetch(BING_URL, {
     headers: { 'user-agent': UA, accept: 'application/rss+xml, application/xml, text/xml' },
+  });
+  if (!r.ok) throw new Error('bing ' + r.status);
+  const xml = await r.text();
+  const items = [];
+  const seen = new Set();
+  for (const block of (xml.match(/<item>[\s\S]*?<\/item>/g) || []).slice(0, MAX_ITEMS)) {
+    const title = decodeEntities(cdata(field(block, 'title')));
+    let url = decodeEntities(cdata(field(block, 'link')));
+    const um = url.match(/[?&]url=([^&]+)/); // bing apiclick wrapper
+    if (um) { try { url = decodeURIComponent(um[1]); } catch (e) { /* keep wrapper */ } }
+    const pub = cdata(field(block, 'pubDate'));
+    const source = decodeEntities(field(block, 'News:Source')).replace(/\s+on MSN$/i, '').trim() || null;
+    const img = decodeEntities(field(block, 'News:Image'));
+    const desc = decodeEntities(cdata(field(block, 'description'))).replace(/<[^>]+>/g, '').trim();
+    const dedupe = title.toLowerCase();
+    if (!title || !url || seen.has(dedupe)) continue;
+    seen.add(dedupe);
+    items.push({
+      title,
+      url,
+      source,
+      date: pub ? new Date(pub).toISOString() : null,
+      image: img || null,
+      imageType: img ? 'article' : null,
+      snippet: desc || null,
+    });
+  }
+  finalize(items);
+  return { updated: new Date().toISOString(), query: 'matsunori', via: 'bing', items };
+}
+
+async function fromGoogle() {
+  const r = await fetch(FEED_URL, {
+    headers: {
+      'user-agent': UA,
+      accept: 'application/rss+xml, application/xml, text/xml',
+      'accept-language': 'en-US,en;q=0.9',
+    },
   });
   if (!r.ok) throw new Error('rss ' + r.status);
   const xml = await r.text();
@@ -89,7 +138,20 @@ async function buildFeed() {
     delete it.gLink;
     delete it.sourceUrl;
   }
-  return { updated: new Date().toISOString(), query: 'matsunori', items };
+  return { updated: new Date().toISOString(), query: 'matsunori', via: 'google', items };
+}
+
+function finalize(items) {
+  items.sort((a, b) => ((a.date || '') < (b.date || '') ? 1 : -1));
+  for (const it of items) {
+    if (!it.image) {
+      const host = hostOf(it.url);
+      if (host) {
+        it.image = 'https://www.google.com/s2/favicons?domain=' + host + '&sz=128';
+        it.imageType = 'favicon';
+      }
+    }
+  }
 }
 
 /* Resolve the publisher URL, then scrape og:image / og:description.
