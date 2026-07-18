@@ -212,8 +212,10 @@ a.pill-row:hover { background: rgba(217, 164, 65, .07); }
 .news-highlights { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: clamp(14px, 2vw, 22px); max-width: 980px; margin-bottom: clamp(26px, 3.6vw, 38px); }
 .news-hl { display: flex; flex-direction: column; gap: 16px; background: var(--nori); border: 1px solid var(--hair25); padding: clamp(20px, 3vw, 28px); transition: border-color .3s; }
 .news-hl:hover, .news-hl:focus-visible { border-color: rgba(217, 164, 65, .45); }
-.news-hl-logo { display: flex; align-items: center; height: 20px; color: var(--cream); }
+.news-hl-logo { display: flex; align-items: center; height: 26px; color: var(--cream); }
 .news-hl-logo svg { height: 15px; width: auto; display: block; }
+.news-hl-logo svg[aria-label="Time Out"] { height: 26px; }
+.news-hl-logo svg[aria-label="The Infatuation"] { height: 13px; }
 .news-hl-wordmark { font: 500 12px var(--sans); letter-spacing: .34em; color: var(--cream); }
 .news-hl-quote { font: italic 400 clamp(16px, 1.8vw, 19px)/1.5 var(--serif); color: var(--rice); text-wrap: pretty; }
 .news-hl-link { margin-top: auto; font: 500 9px var(--mono); letter-spacing: .22em; color: var(--uni); }
