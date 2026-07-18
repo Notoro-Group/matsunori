@@ -257,7 +257,8 @@
   var galCaption = $('#gal-caption'), galNum = $('#gal-num');
   var galSegs = $$('#gal-segs span');
   var galHeart = $('#gal-heart'), galHint = $('#gal-hint'), galOishii = $('#gal-oishii');
-  var galIdx = 0, galStage = 0, galLastP, galUp = false;
+  var galIdx = 0, galStage = 0, galLastP;
+  var galSuppressUntil = 0, galJumped = false;
   var heartT = null, heartOn = false;
   var gDrag = false, gMode = null, gx = 0, gy = 0, gdx = 0;
 
@@ -293,26 +294,57 @@
       galFly.style.transform = 'translate(120vw,40px) rotate(9deg)';
     }
   }
+  // While the deck is pinned, the sticky pin looks identical at any scroll
+  // offset inside the wrapper — so repositioning the page scroll is invisible.
+  // That lets us snap to stage boundaries (one gesture = one card) and
+  // collapse to the wrapper top on upward scroll (quick exit).
+  function instantScrollTo(top) {
+    var de = document.documentElement, prev = de.style.scrollBehavior;
+    de.style.scrollBehavior = 'auto';
+    window.scrollTo(0, top);
+    de.style.scrollBehavior = prev;
+  }
+  function galSnapToStage() {
+    var wrapTop = galWrap.getBoundingClientRect().top + window.scrollY;
+    var step = (galWrap.offsetHeight - window.innerHeight) / 7.5;
+    instantScrollTo(wrapTop + step * galStage + 2);
+    galJumped = true;
+  }
+  function deckAdvance() {
+    if (galStage >= 7) return; // stages 0–6 = cards, 7 = back to first (reset)
+    var prev = galStage % 7;
+    galStage += 1;
+    flyGo(prev);
+    setGalIdx(galStage % 7);
+    galSuppressUntil = Date.now() + 700; // absorb leftover flick momentum
+    galSnapToStage();
+  }
+  function deckCollapseUp() {
+    galStage = 0;
+    setGalIdx(0);
+    galSnapToStage(); // park at the wrapper top: the next upward flick exits
+  }
   function deckPass(vh) {
     if (!galWrap || window.innerWidth >= 780) return;
     var r = galWrap.getBoundingClientRect();
     var total = r.height - vh;
     var gp = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 0;
-    var stage = Math.min(7, Math.floor(gp * 7.5)); // stages 0–6 = cards, 7 = back to first (reset)
+    if (galJumped) { galJumped = false; galLastP = gp; return; }
     var lastP = galLastP; galLastP = gp;
-    if (lastP !== undefined && gp < lastP - 0.0005) {
-      // scrolling up: reset to first card, no un-swiping
-      galUp = true; galStage = stage;
-      setGalIdx(0);
-    } else if (lastP !== undefined && gp > lastP + 0.0005) {
-      if (galUp) {
-        galUp = false; galStage = stage;
-        setGalIdx(stage % 7); // jump to mapped stage without animation
-      } else if (stage > galStage) {
-        var prev = galStage % 7;
-        galStage = stage;
-        flyGo(prev);
-        setGalIdx(stage % 7);
+    if (lastP === undefined) {
+      // first pass (reload mid-deck via scroll restoration): map silently
+      galStage = Math.min(7, Math.floor(gp * 7.5));
+      setGalIdx(galStage % 7);
+      return;
+    }
+    if (gp < lastP - 0.0005) {
+      // scrolling up: never un-swipe — reset to the first card and collapse
+      // the pin so the section releases on the next upward motion
+      if (gp > 0 && galStage > 0) deckCollapseUp();
+    } else if (gp > lastP + 0.0005) {
+      if (Math.min(7, Math.floor(gp * 7.5)) > galStage) {
+        if (Date.now() < galSuppressUntil) galSnapToStage(); // momentum: swallow
+        else deckAdvance();
       }
     }
   }
@@ -344,10 +376,7 @@
       galCard.style.transform = 'translateX(0) rotate(0deg)';
       galOishii.style.opacity = 0;
       gdx = 0; updateHint();
-      if (ok) {
-        var step = (galWrap.getBoundingClientRect().height - window.innerHeight) / 7.5;
-        window.scrollBy(0, step + 2); // keep scroll as the driver
-      }
+      if (ok) deckAdvance(); // advances one card and keeps scroll in sync
       gMode = null;
     };
     galCard.addEventListener('pointerup', galEnd);
