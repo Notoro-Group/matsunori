@@ -257,29 +257,17 @@
 
   /* ============ mobile gallery deck ============ */
 
-  var GAL = ['2', '6', '5', '7', '9', '1', '3'].map(function (n) { return 'assets/gallery/' + n + '.webp'; });
-  var GAL_CAPTIONS = ['The counter', 'Toasted to order', 'House soy', 'Hokkaido uni', 'Fenway', 'The first roll', 'Crisp nori'];
+  var GAL = ['2', '6', '5', '7', '1', '3'].map(function (n) { return 'assets/gallery/' + n + '.webp'; });
+  var GAL_CAPTIONS = ['The counter', 'Toasted to order', 'House soy', 'Hokkaido uni', 'The first roll', 'Crisp nori'];
   var galWrap = $('#gal-wrap');
   var galCard = $('#gal-card'), galImg = $('#gal-img'), galUnder = $('#gal-under');
   var galFly = $('#gal-fly'), galFlyImg = $('#gal-fly-img');
   var galCaption = $('#gal-caption'), galNum = $('#gal-num');
   var galSegs = $$('#gal-segs span');
   var galHeart = $('#gal-heart'), galHint = $('#gal-hint'), galOishii = $('#gal-oishii');
-  var galIdx = 0, galStage = 0, galLastP;
-  var galAcc = 0, galCooldownUntil = 0, galJumped = false, galSyncT = null;
-  var galArmed = false, galWheelT = 0, galRewindT = null;
+  var galIdx = 0, galInit = false, galFlyT = null;
   var heartT = null, heartOn = false;
   var gDrag = false, gMode = null, gx = 0, gy = 0, gdx = 0;
-
-  // a card may only advance on a FRESH gesture: a new touch, or a wheel
-  // burst separated from the last by a beat. Momentum events from the same
-  // flick never re-arm, so one hard scroll can never flip several cards.
-  window.addEventListener('touchstart', function () { galArmed = true; }, { passive: true });
-  window.addEventListener('wheel', function () {
-    var now = Date.now();
-    if (now - galWheelT > 150) galArmed = true;
-    galWheelT = now;
-  }, { passive: true });
 
   function applyGal() {
     galImg.src = GAL[galIdx];
@@ -298,6 +286,7 @@
     galHint.classList.toggle('hide', gdx > 20 || heartOn);
   }
   function flyGo(i) {
+    clearTimeout(galFlyT);
     galFlyImg.src = GAL[i];
     heartOn = true; updateHint();
     galHeart.classList.remove('on');
@@ -313,103 +302,42 @@
       galFly.style.transform = 'translate(120vw,40px) rotate(9deg)';
     }
   }
-  // While the deck is pinned, the sticky pin looks identical at any scroll
-  // offset inside the wrapper — so repositioning the page scroll is invisible.
-  // But iOS applies programmatic scrolls unreliably during momentum, so we
-  // NEVER touch the scroll mid-gesture: cards advance off an accumulated-
-  // distance threshold, and the position is quietly re-parked at the current
-  // stage boundary only after scrolling settles.
-  function instantScrollTo(top) {
-    var de = document.documentElement, prev = de.style.scrollBehavior;
-    de.style.scrollBehavior = 'auto';
-    window.scrollTo(0, top);
-    de.style.scrollBehavior = prev;
-  }
-  function galStep() {
-    return (galWrap.offsetHeight - window.innerHeight) / 7;
-  }
-  function galPinned(r, vh) {
-    return r.top <= 1 && r.bottom >= vh - 1;
-  }
-  function galResync() {
-    if (!galWrap || window.innerWidth >= 780 || gDrag) return;
-    var vh = window.innerHeight;
-    var r = galWrap.getBoundingClientRect();
-    if (!galPinned(r, vh)) return;
-    var top = r.top + window.scrollY;
-    // on the last card park just shy of release, so the next scroll moves on
-    var target = galStage >= 6 ? top + (r.height - vh) - 60 : top + galStep() * galStage + 2;
-    // forward only: an upward programmatic scroll makes mobile browsers
-    // re-show their toolbar (they read it as user scrolling up)
-    if (target <= window.scrollY) return;
-    galJumped = true;
-    instantScrollTo(target);
-  }
-  function deckAdvance() {
-    if (galStage >= 6) return; // 7 cards; the last one stays — no wrap-around
-    var prev = galStage;
-    galStage += 1;
-    flyGo(prev);
-    setGalIdx(galStage);
-    galArmed = false; // one advance per gesture
-    galCooldownUntil = Date.now() + 350;
-    galAcc = 0;
-  }
-  // scroll up: one rewind animation, all the way back to the first card —
-  // the fly layer returns from the right carrying card 1, then lands
-  function deckRewind() {
-    if (galStage === 0 && (galIdx === 0 || galRewindT !== null)) return;
-    galStage = 0;
-    galAcc = 0;
-    if (reduced) { setGalIdx(0); return; }
-    galFlyImg.src = GAL[0];
+  // scrubbing back: the returning card flies in from the right and lands on
+  // the stack (the real card beneath already shows the same image)
+  function flyBack(i) {
+    if (reduced) return;
+    clearTimeout(galFlyT);
+    galFlyImg.src = GAL[i];
     galFly.style.transition = 'none';
     galFly.style.transform = 'translate(120vw,40px) rotate(9deg)';
     void galFly.offsetWidth;
     galFly.style.transition = 'transform .5s ' + EASE;
     galFly.style.transform = 'translate(0,0) rotate(0deg)';
-    clearTimeout(galRewindT);
-    galRewindT = setTimeout(function () {
-      galRewindT = null;
-      if (galStage !== 0) return; // user scrolled down again mid-rewind
-      setGalIdx(0); // same image as the landed fly: seamless swap
+    galFlyT = setTimeout(function () {
       galFly.style.transition = 'none';
       galFly.style.transform = 'translateX(120vw)';
     }, 520);
   }
+  // scrubbed exactly like the anatomy pin: the card index maps directly to
+  // pinned progress, reversible in both directions, no scroll manipulation
   function deckPass(vh) {
     if (!galWrap || window.innerWidth >= 780) return;
     var r = galWrap.getBoundingClientRect();
     var total = r.height - vh;
-    var gp = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 0;
-    if (galJumped) { galJumped = false; galLastP = gp; return; }
-    var lastP = galLastP; galLastP = gp;
-    if (lastP === undefined) {
-      // first pass (reload mid-deck via scroll restoration): map silently
-      galStage = Math.min(6, Math.floor(gp * 7));
-      setGalIdx(galStage);
+    var p = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 0;
+    var stage = Math.min(GAL.length - 1, Math.floor(p * GAL.length));
+    if (!galInit) {
+      // first pass (including reload mid-deck via scroll restoration)
+      galInit = true;
+      galIdx = stage;
+      applyGal();
       return;
     }
-    if (gp < lastP - 0.0005) {
-      // scrolling up: rewind to the first card in one animation and park at
-      // the wrapper top so the section releases without a long climb
-      galAcc = 0;
-      if (galPinned(r, vh)) {
-        deckRewind();
-        if (-r.top > 8) {
-          galJumped = true;
-          instantScrollTo(r.top + window.scrollY);
-        }
-      }
-    } else if (gp > lastP + 0.0005 && galPinned(r, vh)) {
-      galAcc += (gp - lastP) * total;
-      if (galAcc >= galStep() * 0.5 && galStage < 6) {
-        if (galArmed && Date.now() >= galCooldownUntil) deckAdvance();
-        else galAcc = 0; // momentum from the same flick: absorb it
-      }
-      clearTimeout(galSyncT);
-      galSyncT = setTimeout(galResync, 200);
-    }
+    if (stage === galIdx) return;
+    var prev = galIdx;
+    setGalIdx(stage);
+    if (stage > prev) flyGo(prev); // forward: the old card swipes out (+ heart)
+    else flyBack(stage);           // backward: the card returns
   }
 
   if (galCard) {
@@ -439,7 +367,9 @@
       galCard.style.transform = 'translateX(0) rotate(0deg)';
       galOishii.style.opacity = 0;
       gdx = 0; updateHint();
-      if (ok) { deckAdvance(); galResync(); } // no momentum active: safe to re-park
+      // smooth-scroll one stage step: scroll stays the driver, the stage
+      // crossing plays the fly-out exactly as a scrolled advance would
+      if (ok) window.scrollBy(0, (galWrap.offsetHeight - window.innerHeight) / GAL.length + 2);
       gMode = null;
     };
     galCard.addEventListener('pointerup', galEnd);

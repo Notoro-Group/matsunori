@@ -209,6 +209,16 @@ a.pill-row:hover { background: rgba(217, 164, 65, .07); }
 .news-kicker { font: 400 10px var(--mono); letter-spacing: .3em; color: var(--steam); }
 .news-all { border: 1px solid rgba(217, 164, 65, .55); background: none; cursor: pointer; padding: 8px 14px; border-radius: 2px; font: 500 9.5px var(--mono); letter-spacing: .2em; color: var(--uni); transition: background .25s; }
 .news-all:hover, .news-all:focus-visible { background: rgba(217, 164, 65, .1); }
+.news-highlights { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: clamp(14px, 2vw, 22px); max-width: 980px; margin-bottom: clamp(26px, 3.6vw, 38px); }
+.news-hl { display: flex; flex-direction: column; gap: 16px; background: var(--nori); border: 1px solid var(--hair25); padding: clamp(20px, 3vw, 28px); transition: border-color .3s; }
+.news-hl:hover, .news-hl:focus-visible { border-color: rgba(217, 164, 65, .45); }
+.news-hl-logo { display: flex; align-items: center; height: 20px; color: var(--cream); }
+.news-hl-logo svg { height: 15px; width: auto; display: block; }
+.news-hl-wordmark { font: 500 12px var(--sans); letter-spacing: .34em; color: var(--cream); }
+.news-hl-quote { font: italic 400 clamp(16px, 1.8vw, 19px)/1.5 var(--serif); color: var(--rice); text-wrap: pretty; }
+.news-hl-link { margin-top: auto; font: 500 9px var(--mono); letter-spacing: .22em; color: var(--uni); }
+.news-hl-arrow { display: inline-block; transition: transform .3s var(--ease); }
+.news-hl:hover .news-hl-arrow { transform: translate(3px, -3px); }
 .news-list { border-top: 1px solid var(--hair25); max-width: 980px; }
 .news-row { display: flex; align-items: center; gap: clamp(14px, 2.4vw, 24px); padding: 16px 2px; border-bottom: 1px solid var(--hair25); transition: background .25s; }
 .news-row:hover, .news-row:focus-visible { background: rgba(217, 164, 65, .05); }
@@ -257,7 +267,7 @@ a.pill-row:hover { background: rgba(217, 164, 65, .07); }
 .g-item span { position: absolute; left: 10px; bottom: 8px; font: 400 9px var(--mono); color: rgba(244, 239, 230, .85); letter-spacing: .2em; }
 
 /* mobile deck */
-.deck-wrap { display: none; height: 800vh; position: relative; } /* 7 cards × one viewport of travel each */
+.deck-wrap { display: none; height: 580vh; position: relative; } /* scrubbed like the anatomy pin: ~80vh of travel per card */
 .deck-pin { position: sticky; top: 0; height: 100vh; min-height: 520px; overflow: hidden; background: var(--ink); }
 .deck-under { position: absolute; inset: 0; transform: scale(.96); opacity: .45; overflow: hidden; background: var(--nori); }
 .deck-under img { width: 100%; height: 100%; object-fit: cover; display: block; }
