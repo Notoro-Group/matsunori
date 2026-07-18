@@ -229,6 +229,27 @@
   var anatNum = $('#anat-num'), anatProg = $('#anat-prog'), sweep = $('#anatomy-sweep');
   var curFrame = -1;
 
+  // the fold illustrations are looping videos (posters carry the static art)
+  function kickFolds() {
+    folds.forEach(function (v) {
+      if (!v || v.tagName !== 'VIDEO' || !v.paused) return;
+      v.muted = true;
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});
+    });
+  }
+  if (reduced) {
+    folds.forEach(function (v) {
+      if (v && v.tagName === 'VIDEO') { v.removeAttribute('autoplay'); v.pause(); }
+    });
+  } else {
+    kickFolds();
+    // hidden documents suspend playback; resume when the tab returns
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) kickFolds();
+    });
+  }
+
   function clipFor(frame, i) {
     return frame === i ? 'inset(0 0 0 0)' : frame > i ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)';
   }
