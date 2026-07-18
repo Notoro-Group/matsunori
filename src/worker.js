@@ -6,10 +6,11 @@
 const FEED_URL = 'https://news.google.com/rss/search?q=%22matsunori%22&hl=en-US&gl=US&ceid=US:en';
 const BING_URL = 'https://www.bing.com/news/search?q=%22matsunori%22&format=rss&mkt=en-US';
 const CACHE_SECONDS = 14400; // 4h — press cadence, not a ticker
-const ENRICH_LIMIT = 12;     // resolve+og-scrape at most N articles per rebuild
-                             // (up to 3 subrequests each — stay inside the 50/request budget)
+const ENRICH_LIMIT = 10;     // resolve+og-scrape at most N articles per rebuild
+                             // (up to 4 subrequests each — stay inside the 50/request budget)
 const MAX_ITEMS = 60;
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
+const FB_UA = 'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)';
 
 export default {
   async fetch(request, env, ctx) {
@@ -21,7 +22,7 @@ export default {
 
 async function news(request, ctx) {
   const cache = caches.default;
-  const key = new Request(new URL('/api/news?v=4', request.url));
+  const key = new Request(new URL('/api/news?v=7', request.url));
   const hit = await cache.match(key);
   if (hit) return hit;
 
@@ -43,13 +44,54 @@ async function news(request, ctx) {
 }
 
 /* Google News has the best coverage but 503s datacenter egress at times;
-   Bing News RSS carries real publisher URLs, snippets, and thumbnails inline.
-   Try Google first, fall through to Bing. */
+   Bing News RSS carries real publisher URLs and snippets inline. Fetch both,
+   merge and dedupe by title, then og-scrape the publisher pages — article
+   og:image is the same thumbnail Google News itself displays. */
 async function buildFeed() {
-  let out = null;
-  try { out = await fromGoogle(); } catch (e) { out = null; }
-  if (!out || !out.items.length) out = await fromBing();
-  return out;
+  const [g, b] = await Promise.allSettled([fromGoogle(), fromBing()]);
+  const gi = g.status === 'fulfilled' ? g.value : null;
+  const bi = b.status === 'fulfilled' ? b.value : null;
+  if (!gi && !bi) throw (g.status === 'rejected' ? g.reason : new Error('no feeds'));
+
+  // bing first: on a title collision its copy wins — it already carries a
+  // publisher URL and snippet — but adopt the google copy's resolver token
+  // (and source name) so enrichment can still reach the original article
+  // when bing hands us a syndicated msn.com link
+  const byKey = new Map();
+  for (const it of [...(bi || []), ...(gi || [])]) {
+    const k = it.title.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    if (!k) continue;
+    const prev = byKey.get(k);
+    if (!prev) { byKey.set(k, it); continue; }
+    if (!prev.gLink && it.gLink) prev.gLink = it.gLink;
+    if (!prev.sourceUrl && it.sourceUrl) prev.sourceUrl = it.sourceUrl;
+    if (!prev.snippet && it.snippet) prev.snippet = it.snippet;
+    if (!prev.source && it.source) prev.source = it.source;
+  }
+  const items = [...byKey.values()];
+  items.sort((a, z) => ((a.date || '') < (z.date || '') ? 1 : -1));
+
+  await Promise.allSettled(items.slice(0, ENRICH_LIMIT).map(enrich));
+
+  for (const it of items) {
+    if (!it.image) {
+      // fall back to the publisher favicon (rendered small, not as a cover);
+      // for google/msn links prefer the original outlet's domain
+      const host = hostOf(!isGoogle(it.url) && !isMsn(it.url) ? it.url : it.sourceUrl || it.url);
+      if (host) {
+        it.image = 'https://www.google.com/s2/favicons?domain=' + host + '&sz=128';
+        it.imageType = 'favicon';
+      }
+    }
+    delete it.gLink;
+    delete it.sourceUrl;
+  }
+  return {
+    updated: new Date().toISOString(),
+    query: 'matsunori',
+    via: [gi && 'google', bi && 'bing'].filter(Boolean).join('+'),
+    items,
+  };
 }
 
 async function fromBing() {
@@ -67,7 +109,8 @@ async function fromBing() {
     if (um) { try { url = decodeURIComponent(um[1]); } catch (e) { /* keep wrapper */ } }
     const pub = cdata(field(block, 'pubDate'));
     const source = decodeEntities(field(block, 'News:Source')).replace(/\s+on MSN$/i, '').trim() || null;
-    const img = decodeEntities(field(block, 'News:Image'));
+    // Bing's News:Image thumbnails are unreliable for syndicated items —
+    // og:image from the article itself (via enrich) is what Google News shows
     const desc = decodeEntities(cdata(field(block, 'description'))).replace(/<[^>]+>/g, '').trim();
     const dedupe = title.toLowerCase();
     if (!title || !url || seen.has(dedupe)) continue;
@@ -77,13 +120,12 @@ async function fromBing() {
       url,
       source,
       date: pub ? new Date(pub).toISOString() : null,
-      image: img || null,
-      imageType: img ? 'article' : null,
+      image: null,
+      imageType: null,
       snippet: desc || null,
     });
   }
-  finalize(items);
-  return { updated: new Date().toISOString(), query: 'matsunori', via: 'bing', items };
+  return items;
 }
 
 async function fromGoogle() {
@@ -122,36 +164,7 @@ async function fromGoogle() {
       snippet: null,
     });
   }
-  items.sort((a, b) => ((a.date || '') < (b.date || '') ? 1 : -1));
-
-  await Promise.allSettled(items.slice(0, ENRICH_LIMIT).map(enrich));
-
-  for (const it of items) {
-    if (!it.image) {
-      // fall back to the publisher favicon (rendered small, not as a cover)
-      const host = hostOf(!isGoogle(it.url) ? it.url : it.sourceUrl || it.url);
-      if (host) {
-        it.image = 'https://www.google.com/s2/favicons?domain=' + host + '&sz=128';
-        it.imageType = 'favicon';
-      }
-    }
-    delete it.gLink;
-    delete it.sourceUrl;
-  }
-  return { updated: new Date().toISOString(), query: 'matsunori', via: 'google', items };
-}
-
-function finalize(items) {
-  items.sort((a, b) => ((a.date || '') < (b.date || '') ? 1 : -1));
-  for (const it of items) {
-    if (!it.image) {
-      const host = hostOf(it.url);
-      if (host) {
-        it.image = 'https://www.google.com/s2/favicons?domain=' + host + '&sz=128';
-        it.imageType = 'favicon';
-      }
-    }
-  }
+  return items;
 }
 
 /* Resolve the publisher URL, then scrape og:image / og:description.
@@ -160,33 +173,48 @@ async function enrich(it) {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), 9000);
   try {
-    if (isGoogle(it.url)) {
+    // resolve opaque google links, and upgrade syndicated msn copies to the
+    // original publisher when we hold a google resolver token for the story
+    if ((isGoogle(it.url) || isMsn(it.url)) && it.gLink) {
       const real = await resolveViaBatch(it.gLink, ctrl.signal);
       if (real) it.url = real;
     }
     if (isGoogle(it.url)) return; // opaque link we couldn't resolve
-    const r = await fetch(it.url, {
-      redirect: 'follow',
-      signal: ctrl.signal,
-      headers: { 'user-agent': UA, accept: 'text/html' },
-    });
-    if (!r.ok) return;
-    const html = (await r.text()).slice(0, 300000);
-    if (r.url && !isGoogle(r.url)) it.url = r.url;
-    const img = ogMeta(html, 'image');
-    const desc = ogMeta(html, 'description');
-    if (img) {
+    const meta = await fetchArticleMeta(it.url, ctrl.signal);
+    if (!meta) return;
+    if (meta.finalUrl && !isGoogle(meta.finalUrl)) it.url = meta.finalUrl;
+    if (meta.img && !/BB10piIP/i.test(meta.img)) { // msn's generic mosaic
       try {
-        it.image = new URL(img, r.url).href;
+        it.image = new URL(meta.img, meta.finalUrl || it.url).href;
         it.imageType = 'article';
       } catch (e) { /* unresolvable relative URL */ }
     }
-    if (desc) it.snippet = decodeEntities(desc);
+    if (meta.desc) it.snippet = decodeEntities(meta.desc);
   } catch (err) {
     /* timeout / blocked fetch — fallbacks apply */
   } finally {
     clearTimeout(timer);
   }
+}
+
+/* Some publishers (Advance Local, NBC O&O) 403 generic bots but serve link
+   previews — retry with the Facebook crawler UA before giving up. */
+async function fetchArticleMeta(url, signal) {
+  for (const ua of [UA, FB_UA]) {
+    try {
+      const r = await fetch(url, {
+        redirect: 'follow',
+        signal,
+        headers: { 'user-agent': ua, accept: 'text/html', 'accept-language': 'en-US,en;q=0.9' },
+      });
+      if (!r.ok) continue;
+      const html = (await r.text()).slice(0, 300000);
+      const img = ogMeta(html, 'image');
+      const desc = ogMeta(html, 'description');
+      if (img || desc) return { img, desc, finalUrl: r.url };
+    } catch (e) { /* try next UA */ }
+  }
+  return null;
 }
 
 /* Newer Google News links are opaque tokens. The article stub page carries a
@@ -273,6 +301,11 @@ function decodeEntities(s) {
 
 function isGoogle(u) {
   return /news\.google\.com/.test(u || '');
+}
+
+function isMsn(u) {
+  const h = hostOf(u) || '';
+  return h === 'msn.com' || h.endsWith('.msn.com');
 }
 
 function hostOf(u) {

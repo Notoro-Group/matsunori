@@ -266,7 +266,7 @@
   var galSegs = $$('#gal-segs span');
   var galHeart = $('#gal-heart'), galHint = $('#gal-hint'), galOishii = $('#gal-oishii');
   var galIdx = 0, galStage = 0, galLastP;
-  var galSuppressUntil = 0, galJumped = false;
+  var galAcc = 0, galCooldownUntil = 0, galJumped = false, galSyncT = null;
   var heartT = null, heartOn = false;
   var gDrag = false, gMode = null, gx = 0, gy = 0, gdx = 0;
 
@@ -304,19 +304,29 @@
   }
   // While the deck is pinned, the sticky pin looks identical at any scroll
   // offset inside the wrapper — so repositioning the page scroll is invisible.
-  // That lets us snap to stage boundaries (one gesture = one card) and
-  // collapse to the wrapper top on upward scroll (quick exit).
+  // But iOS applies programmatic scrolls unreliably during momentum, so we
+  // NEVER touch the scroll mid-gesture: cards advance off an accumulated-
+  // distance threshold, and the position is quietly re-parked at the current
+  // stage boundary only after scrolling settles.
   function instantScrollTo(top) {
     var de = document.documentElement, prev = de.style.scrollBehavior;
     de.style.scrollBehavior = 'auto';
     window.scrollTo(0, top);
     de.style.scrollBehavior = prev;
   }
-  function galSnapToStage() {
-    var wrapTop = galWrap.getBoundingClientRect().top + window.scrollY;
-    var step = (galWrap.offsetHeight - window.innerHeight) / 7.5;
-    instantScrollTo(wrapTop + step * galStage + 2);
+  function galStep() {
+    return (galWrap.offsetHeight - window.innerHeight) / 7.5;
+  }
+  function galPinned(r, vh) {
+    return r.top <= 1 && r.bottom >= vh - 1;
+  }
+  function galResync() {
+    if (!galWrap || window.innerWidth >= 780 || gDrag) return;
+    var vh = window.innerHeight;
+    var r = galWrap.getBoundingClientRect();
+    if (!galPinned(r, vh)) return;
     galJumped = true;
+    instantScrollTo(r.top + window.scrollY + galStep() * galStage + 2);
   }
   function deckAdvance() {
     if (galStage >= 7) return; // stages 0–6 = cards, 7 = back to first (reset)
@@ -324,13 +334,16 @@
     galStage += 1;
     flyGo(prev);
     setGalIdx(galStage % 7);
-    galSuppressUntil = Date.now() + 700; // absorb leftover flick momentum
-    galSnapToStage();
+    galCooldownUntil = Date.now() + 550;
+    galAcc = 0;
   }
   function deckCollapseUp() {
     galStage = 0;
     setGalIdx(0);
-    galSnapToStage(); // park at the wrapper top: the next upward flick exits
+    galAcc = 0;
+    galJumped = true;
+    // park at the wrapper top: the next upward motion exits the section
+    instantScrollTo(galWrap.getBoundingClientRect().top + window.scrollY);
   }
   function deckPass(vh) {
     if (!galWrap || window.innerWidth >= 780) return;
@@ -349,11 +362,15 @@
       // scrolling up: never un-swipe — reset to the first card and collapse
       // the pin so the section releases on the next upward motion
       if (gp > 0 && galStage > 0) deckCollapseUp();
-    } else if (gp > lastP + 0.0005) {
-      if (Math.min(7, Math.floor(gp * 7.5)) > galStage) {
-        if (Date.now() < galSuppressUntil) galSnapToStage(); // momentum: swallow
-        else deckAdvance();
+      else galAcc = 0;
+    } else if (gp > lastP + 0.0005 && galPinned(r, vh)) {
+      galAcc += (gp - lastP) * total;
+      if (galAcc >= galStep() * 0.6) {
+        if (Date.now() >= galCooldownUntil) deckAdvance();
+        else galAcc = 0; // same flick's momentum: absorb it
       }
+      clearTimeout(galSyncT);
+      galSyncT = setTimeout(galResync, 200);
     }
   }
 
@@ -384,7 +401,7 @@
       galCard.style.transform = 'translateX(0) rotate(0deg)';
       galOishii.style.opacity = 0;
       gdx = 0; updateHint();
-      if (ok) deckAdvance(); // advances one card and keeps scroll in sync
+      if (ok) { deckAdvance(); galResync(); } // no momentum active: safe to re-park
       gMode = null;
     };
     galCard.addEventListener('pointerup', galEnd);
@@ -490,7 +507,6 @@
         newsList.appendChild(row);
         watchAnim(row);
       });
-      newsAllBtn.textContent = 'VIEW ALL — ' + newsItems.length + ' ↗';
       buildModalNodes();
     }).catch(newsUnavailable);
   }

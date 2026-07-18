@@ -294,12 +294,14 @@ a.pill-row:hover { background: rgba(217, 164, 65, .07); }
 .footer-brand { display: flex; align-items: flex-start; gap: 20px; }
 .footer-wordmark { font: 400 clamp(21px, 2.2vw, 26px) var(--serif); letter-spacing: .05em; color: var(--rice); }
 .footer-est { font: 400 9px var(--mono); color: var(--steam); margin-top: 10px; }
-.footer-seal span { width: 48px; height: 48px; border: 2.5px solid var(--akami); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; transform: rotate(-5deg); font: 700 19px var(--jpfont); color: var(--akami); }
 .footer-cols { display: flex; gap: clamp(36px, 5vw, 70px); flex-wrap: wrap; padding-right: clamp(0px, 4vw, 60px); }
 .footer-col { display: flex; flex-direction: column; gap: 8px; font: 500 10px var(--sans); letter-spacing: .24em; }
 .footer-h { color: var(--steam); }
 .footer-col a { color: var(--cream); }
 .footer-col a:hover { color: var(--uni); }
+.footer-parent { color: var(--rice); }
+.footer-col a.footer-child { margin-left: 10px; padding-left: 12px; border-left: 1px solid var(--hair25); font-weight: 400; color: var(--cream2); transition: border-color .25s; }
+.footer-col a.footer-child:hover { color: var(--uni); border-left-color: rgba(217, 164, 65, .5); }
 .footer-bar { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 38px; border-top: 1px solid var(--hair22); padding-top: 16px; font: 400 9px var(--mono); color: var(--steam); }
 
 /* ---------- responsive (mobile < 780px) ---------- */
