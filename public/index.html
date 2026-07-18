@@ -223,14 +223,41 @@
 </section>
 
 <section id="wagyu" class="wagyu">
+  <div class="wagyu-marbling far" data-parallax data-pfactor="0.05" aria-hidden="true">
+    <svg viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="rgba(244,239,230,.05)" stroke-width="1" stroke-linecap="round">
+        <path d="M-40 90 C 140 60, 260 130, 430 105 S 720 55, 900 100 S 1120 140, 1260 105"/>
+        <path d="M-40 210 C 120 240, 320 180, 520 215 S 830 255, 1020 205 S 1180 175, 1260 200"/>
+        <path d="M-40 350 C 180 320, 340 390, 560 355 S 880 305, 1080 360 S 1200 390, 1260 370"/>
+        <path d="M-40 490 C 160 520, 380 455, 600 495 S 900 545, 1100 490 S 1210 465, 1260 480"/>
+        <path d="M210 100 C 280 135, 350 150, 470 140"/>
+        <path d="M640 220 C 730 195, 820 190, 930 210"/>
+        <path d="M330 360 C 420 335, 500 330, 610 350"/>
+      </g>
+    </svg>
+  </div>
+  <div class="wagyu-marbling near" data-parallax data-pfactor="0.13" aria-hidden="true">
+    <svg viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="rgba(244,239,230,.08)" stroke-width="1" stroke-linecap="round">
+        <path d="M-40 150 C 200 120, 380 185, 580 155 S 900 105, 1090 155 S 1210 185, 1260 165"/>
+        <path d="M-40 300 C 220 330, 430 260, 660 300 S 960 350, 1150 295"/>
+        <path d="M-40 445 C 190 415, 400 480, 640 445 S 950 395, 1160 450"/>
+        <path d="M150 160 C 230 190, 330 205, 450 190 S 640 165, 740 180"/>
+        <path d="M520 310 C 600 285, 700 278, 820 298"/>
+        <path d="M280 455 C 370 480, 470 488, 590 470"/>
+        <path d="M840 130 C 910 108, 990 104, 1080 122"/>
+      </g>
+    </svg>
+  </div>
   <div class="wagyu-mark" data-parallax data-pfactor="0.12">和牛</div>
   <div class="wagyu-inner">
     <div data-anim="fade" class="wagyu-kicker">THE WAGYU DOSSIER</div>
     <h2 data-anim="words">Proof, on paper.</h2>
     <div class="wagyu-table">
       <div data-anim="row" class="wagyu-row"><span class="wagyu-key">PARTNER</span><span class="wagyu-val">WAGYU MASTER — S FOODS INC.</span></div>
-      <div data-anim="row" data-delay="120" class="wagyu-row"><span class="wagyu-key">TRACEABILITY</span><span class="wagyu-val">LINEAGE VERIFIED — JAPAN NATIONAL SYSTEM</span></div>
-      <div data-anim="row" data-delay="240" class="wagyu-row"><span class="wagyu-key">GRADE</span><span class="wagyu-val">A5 — JAPAN MEAT GRADING ASSOC.</span></div>
+      <div data-anim="row" data-delay="120" class="wagyu-row"><span class="wagyu-key">SOURCES</span><span class="wagyu-val">MIYAZAKI · WAGYU MASTER · TORIYAMA FARMS</span></div>
+      <div data-anim="row" data-delay="240" class="wagyu-row"><span class="wagyu-key">TRACEABILITY</span><span class="wagyu-val">LINEAGE VERIFIED — JAPAN NATIONAL SYSTEM</span></div>
+      <div data-anim="row" data-delay="360" class="wagyu-row"><span class="wagyu-key">GRADE</span><span class="wagyu-val">A5 — JAPAN MEAT GRADING ASSOC.</span></div>
     </div>
     <div data-anim="mask-rise" data-delay="200" class="wagyu-para">Every cut is born, raised and graded in Japan, and arrives with its certificate. The originals hang by the counter — <span class="em">ask to see them; they’re always on display.</span></div>
     <div data-anim="stamp" data-delay="420" class="wagyu-seal"><span>A5</span></div>
@@ -242,6 +269,15 @@
   <div data-anim="words" class="press-quote">“A sushi destination entirely devoted to hand rolls… New England seafood front and center.”</div>
   <div data-anim="draw-x" class="quote-rule"></div>
   <div data-anim="tracking" class="press-outlet">THRILLIST</div>
+</section>
+
+<section id="news" class="news" hidden>
+  <div class="news-head">
+    <span data-anim="fade" class="news-kicker">IN THE NEWS — LIVE</span>
+    <button id="news-all" class="news-all" type="button">VIEW ALL ↗</button>
+  </div>
+  <div id="news-list" class="news-list"></div>
+  <div id="news-note" class="news-note" hidden>LIVE FEED UNAVAILABLE — CHECK BACK SOON</div>
 </section>
 
 <section id="gallery" class="gallery">
@@ -300,11 +336,22 @@
     <div class="footer-cols">
       <div class="footer-col"><span class="footer-h">LOCATIONS</span><a href="https://maps.app.goo.gl/1uYDaBxGDzXBHC2P6" target="_blank" rel="noopener">FENWAY</a><a href="https://maps.app.goo.gl/eTR3m7itv4RwWF3A8" target="_blank" rel="noopener">LIC</a><span class="footer-h">LYNNFIELD — SOON</span></div>
       <div class="footer-col"><span class="footer-h">FOLLOW</span><a href="https://www.instagram.com/matsunori.handrollbar/" target="_blank" rel="noopener">INSTAGRAM</a><a href="https://www.yelp.com/biz/matsunori-handroll-bar-boston-3" target="_blank" rel="noopener">YELP</a><a href="https://maps.app.goo.gl/1uYDaBxGDzXBHC2P6" target="_blank" rel="noopener">GOOGLE</a></div>
-      <div class="footer-col"><span class="footer-h">FAMILY</span><a href="https://mai.boston" target="_blank" rel="noopener">MAI IZAKAYA</a><a href="https://notoro.group" target="_blank" rel="noopener">NOTORO GROUP</a></div>
+      <div class="footer-col"><a class="footer-h" href="https://notoro.group" target="_blank" rel="noopener">NOTORO GROUP FAMILY</a><a href="https://mai.boston" target="_blank" rel="noopener">MAI IZAKAYA</a><a href="https://norinori.boston" target="_blank" rel="noopener">NORINORI IZAKAYA</a></div>
     </div>
   </div>
   <div class="footer-bar"><span>© mmxxvi matsunori — handroll bar</span><span>one roll at a time</span></div>
 </footer>
+
+<div id="news-modal" class="news-modal" role="dialog" aria-modal="true" aria-label="All press mentions" hidden>
+  <div class="news-modal-scrim" id="news-scrim"></div>
+  <div class="news-modal-panel">
+    <div class="news-modal-head">
+      <span class="news-modal-title">PRESS — EVERY MENTION</span>
+      <button id="news-close" class="news-close" type="button">CLOSE ✕</button>
+    </div>
+    <div class="news-modal-body" id="news-modal-body"></div>
+  </div>
+</div>
 
 <script src="js/main.js" defer></script>
 </body>

@@ -6,23 +6,27 @@ Single-page marketing site: hero with brand video, live open/closed status, a sc
 
 ## Stack
 
-Static vanilla HTML/CSS/JS — no framework, no build step. All motion runs on `requestAnimationFrame` + `IntersectionObserver` + CSS transitions, ported 1:1 from the approved design prototype (`Matsunori Site.dc.html` in the design handoff). Design intent is documented in [docs/matsunori-redesign-prd.md](docs/matsunori-redesign-prd.md).
+Static vanilla HTML/CSS/JS — no framework, no build step — plus a small Cloudflare Worker for the live press feed. All motion runs on `requestAnimationFrame` + `IntersectionObserver` + CSS transitions, ported 1:1 from the approved design prototype (`Matsunori Site.dc.html` in the design handoff). Design intent is documented in [docs/matsunori-redesign-prd.md](docs/matsunori-redesign-prd.md).
 
 ```
 public/
 ├── index.html        # all markup, JSON-LD per location
 ├── css/styles.css    # design tokens + all styles
-├── js/main.js        # status computation, reveal system, pinned sections, gallery deck
+├── js/main.js        # status computation, reveal system, pinned sections, gallery deck, news UI
 └── assets/           # photography, anatomy illustrations, logo
+src/
+└── worker.js         # serves assets + /api/news (Google News RSS → resolved links, og:image, snippets)
 ```
+
+### /api/news
+
+Proxies Google News RSS for `"matsunori"`, resolves each item's real publisher URL (including Google's opaque article tokens, via the same batchexecute exchange the Google News web app uses), scrapes `og:image`/`og:description` for the newest 12, and edge-caches the JSON for 4 hours. Publishers that block scraping degrade to favicon + no snippet. The homepage renders the 5 latest; "VIEW ALL" opens an infinite-scroll modal grouped by month.
 
 ## Develop
 
-Any static server works:
-
 ```sh
-python3 -m http.server 4173 -d public
-# → http://localhost:4173
+wrangler dev
+# → http://localhost:8787 (assets + /api/news)
 ```
 
 The mobile experience (gallery swipe deck, compact anatomy) activates below 780px viewport width. The intro loader plays once per session (`sessionStorage`); clear storage to replay it.

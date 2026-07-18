@@ -140,10 +140,7 @@
   /* ============ reveal system ============ */
 
   var pending = null, io = null;
-  function setupAnims() {
-    var els = $$('[data-anim]');
-    if (reduced) return;
-    els.forEach(function (el) {
+  function prepAnim(el) {
       var kind = el.getAttribute('data-anim');
       if (kind === 'fade' || kind === 'row') {
         el.style.opacity = '0';
@@ -184,12 +181,23 @@
           el.appendChild(document.createTextNode(' '));
         });
       }
-    });
+  }
+  function setupAnims() {
+    var els = $$('[data-anim]');
+    if (reduced) return;
+    els.forEach(prepAnim);
     pending = new Set(els);
     io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting) reveal(e.target); });
     }, { threshold: 0.15 });
     els.forEach(function (el) { io.observe(el); });
+  }
+  // register an element injected after initial setup (e.g. live news rows)
+  function watchAnim(el) {
+    if (reduced || !io) return;
+    prepAnim(el);
+    pending.add(el);
+    io.observe(el);
   }
 
   function reveal(el) {
@@ -382,6 +390,137 @@
     galCard.addEventListener('pointerup', galEnd);
     galCard.addEventListener('pointercancel', galEnd);
   }
+
+  /* ============ news (live press mentions via /api/news) ============ */
+
+  var newsSection = $('#news'), newsList = $('#news-list'), newsAllBtn = $('#news-all'), newsNote = $('#news-note');
+  var newsModal = $('#news-modal'), newsBody = $('#news-modal-body');
+  var newsItems = [], newsNodes = [], newsCursor = 0;
+  var NEWS_HOME = 5, NEWS_CHUNK = 14;
+  var MONTHS = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
+  var MONTHS_S = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+  function escHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function first15(s) {
+    if (!s) return null;
+    var w = s.trim().split(/\s+/);
+    return w.length <= 15 ? s.trim() : w.slice(0, 15).join(' ') + '…';
+  }
+  function fmtItemDate(iso) {
+    var d = iso ? new Date(iso) : null;
+    if (!d || isNaN(d)) return '';
+    return MONTHS_S[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+  }
+  function fmtMonth(iso) {
+    var d = iso ? new Date(iso) : null;
+    if (!d || isNaN(d)) return null;
+    return MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+  }
+
+  function newsRow(item) {
+    var a = document.createElement('a');
+    a.className = 'news-row';
+    a.href = item.url; a.target = '_blank'; a.rel = 'noopener';
+    var thumb = item.image
+      ? '<span class="news-thumb' + (item.imageType === 'favicon' ? ' fav' : '') + '"><img src="' + escHtml(item.image) + '" alt="" loading="lazy"></span>'
+      : '<span class="news-thumb ph"><span>松</span></span>';
+    var src = (item.source || '').toUpperCase();
+    var date = fmtItemDate(item.date);
+    var snip = first15(item.snippet);
+    a.innerHTML = thumb +
+      '<span class="news-meta">' +
+        '<span class="news-src">' + escHtml(src + (src && date ? ' — ' : '') + date) + '</span>' +
+        '<span class="news-title">' + escHtml(item.title) + '</span>' +
+        (snip ? '<span class="news-snip">' + escHtml(snip) + '</span>' : '') +
+      '</span>' +
+      '<span class="news-arrow">↗</span>';
+    var img = a.querySelector('.news-thumb img');
+    if (img) img.addEventListener('error', function () {
+      var t = img.parentElement;
+      t.className = 'news-thumb ph';
+      t.innerHTML = '<span>松</span>';
+    });
+    return a;
+  }
+
+  function buildModalNodes() {
+    var lastMonth = null;
+    newsNodes = [];
+    newsItems.forEach(function (it) {
+      var m = fmtMonth(it.date);
+      if (m && m !== lastMonth) {
+        lastMonth = m;
+        var h = document.createElement('div');
+        h.className = 'news-month';
+        h.textContent = m;
+        newsNodes.push(h);
+      }
+      newsNodes.push(newsRow(it));
+    });
+  }
+
+  function renderNewsChunk() {
+    var end = Math.min(newsNodes.length, newsCursor + NEWS_CHUNK);
+    for (; newsCursor < end; newsCursor++) newsBody.appendChild(newsNodes[newsCursor]);
+  }
+
+  function newsUnavailable() {
+    newsSection.hidden = false;
+    newsAllBtn.hidden = true;
+    newsNote.hidden = false;
+  }
+
+  function loadNews() {
+    if (!newsSection || !window.fetch) return;
+    fetch('/api/news').then(function (r) { return r.json(); }).then(function (data) {
+      newsItems = (data.items || []).filter(function (it) { return it && it.title && it.url; });
+      if (!newsItems.length) {
+        if (data.error) newsUnavailable();
+        return; // clean feed with zero mentions: keep the section hidden
+      }
+      newsSection.hidden = false;
+      newsItems.slice(0, NEWS_HOME).forEach(function (it, i) {
+        var row = newsRow(it);
+        row.setAttribute('data-anim', 'fade');
+        row.setAttribute('data-delay', String(i * 90));
+        newsList.appendChild(row);
+        watchAnim(row);
+      });
+      newsAllBtn.textContent = 'VIEW ALL — ' + newsItems.length + ' ↗';
+      buildModalNodes();
+    }).catch(newsUnavailable);
+  }
+
+  function openNewsModal() {
+    newsModal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    if (!newsCursor) renderNewsChunk();
+    // fill until the panel is scrollable (or the feed is exhausted)
+    while (newsCursor < newsNodes.length && newsBody.scrollHeight <= newsBody.clientHeight + 200) renderNewsChunk();
+    var close = $('#news-close');
+    if (close) close.focus();
+  }
+  function closeNewsModal() {
+    newsModal.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  if (newsAllBtn) newsAllBtn.addEventListener('click', openNewsModal);
+  if (newsModal) {
+    $('#news-close').addEventListener('click', closeNewsModal);
+    $('#news-scrim').addEventListener('click', closeNewsModal);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !newsModal.hidden) closeNewsModal();
+    });
+    newsBody.addEventListener('scroll', function () {
+      if (newsBody.scrollTop + newsBody.clientHeight > newsBody.scrollHeight - 600) renderNewsChunk();
+    }, { passive: true });
+  }
+  loadNews();
 
   /* ============ scroll pass (single rAF-throttled driver) ============ */
 
