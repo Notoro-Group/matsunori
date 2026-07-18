@@ -1,0 +1,10 @@
+[
+  { "match": "one of boston s best sushi spots is expanding", "url": "https://www.masslive.com/entertainment/2026/07/one-of-bostons-best-sushi-spots-is-expanding-to-the-suburbs-this-fall.html" },
+  { "match": "authentic affordable japanese eatery", "url": "https://www.masslive.com/destinations/2025/09/authentic-affordable-japanese-eatery-with-homemade-touch-opens-in-boston.html" },
+  { "match": "marketstreet lynnfield to add renowned", "url": "https://patch.com/massachusetts/lynnfield/marketstreet-lynnfield-add-renowned-japanese-handroll-restaurant-nyc" },
+  { "match": "rolling into marketstreet lynnfield", "url": "https://whatnow.com/boston/restaurants/matsunori-handroll-bar-rolling-into-marketstreet-lynnfield/" },
+  { "match": "popular boston handheld sushi restaurant", "url": "https://www.nbcboston.com/entertainment/food-drink-nightlife/popular-boston-handheld-sushi-restaurant-expands-to-suburbs/3922592/" },
+  { "match": "kevin liu loved eating at restaurants", "url": "https://www.bostonglobe.com/2025/09/08/lifestyle/mai-japanese-food-seaport/" },
+  { "match": "new restaurants open in woburn", "url": "https://www.youtube.com/watch?v=InIBKDRRliM" },
+  { "match": "matsunori", "exact": true, "url": "https://www.timeout.com/boston/restaurants/matsunori-handroll-bar" }
+]

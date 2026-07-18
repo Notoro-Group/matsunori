@@ -20,7 +20,16 @@ src/
 
 ### /api/news
 
-Proxies Google News RSS for `"matsunori"`, resolves each item's real publisher URL (including Google's opaque article tokens, via the same batchexecute exchange the Google News web app uses), scrapes `og:image`/`og:description` for the newest 12, and edge-caches the JSON for 4 hours. Publishers that block scraping degrade to favicon + no snippet. The homepage renders the 5 latest; "VIEW ALL" opens an infinite-scroll modal grouped by month.
+Merges Google News + Bing News RSS for `"matsunori"` with a **baked press archive** (`public/data/news-baked.json`), resolves publisher URLs, scrapes `og:image`/`og:description`, and edge-caches the JSON for 4 hours. The homepage renders the 5 latest; "VIEW ALL" opens an infinite-scroll modal grouped by month.
+
+Google and several publishers refuse Cloudflare's datacenter egress, so the archive is baked from a residential connection:
+
+```sh
+node scripts/bake-news.mjs   # fetch feeds, resolve links, scrape og meta
+wrangler deploy              # ship the refreshed archive
+```
+
+New stories still appear live between bakes (favicon fallback until the next bake enriches them). `scripts/news-fixups.json` pins URLs for stories the resolvers can't reach.
 
 ## Develop
 

@@ -267,8 +267,19 @@
   var galHeart = $('#gal-heart'), galHint = $('#gal-hint'), galOishii = $('#gal-oishii');
   var galIdx = 0, galStage = 0, galLastP;
   var galAcc = 0, galCooldownUntil = 0, galJumped = false, galSyncT = null;
+  var galArmed = false, galWheelT = 0;
   var heartT = null, heartOn = false;
   var gDrag = false, gMode = null, gx = 0, gy = 0, gdx = 0;
+
+  // a card may only advance on a FRESH gesture: a new touch, or a wheel
+  // burst separated from the last by a beat. Momentum events from the same
+  // flick never re-arm, so one hard scroll can never flip several cards.
+  window.addEventListener('touchstart', function () { galArmed = true; }, { passive: true });
+  window.addEventListener('wheel', function () {
+    var now = Date.now();
+    if (now - galWheelT > 150) galArmed = true;
+    galWheelT = now;
+  }, { passive: true });
 
   function applyGal() {
     galImg.src = GAL[galIdx];
@@ -315,7 +326,7 @@
     de.style.scrollBehavior = prev;
   }
   function galStep() {
-    return (galWrap.offsetHeight - window.innerHeight) / 7.5;
+    return (galWrap.offsetHeight - window.innerHeight) / 7;
   }
   function galPinned(r, vh) {
     return r.top <= 1 && r.bottom >= vh - 1;
@@ -326,24 +337,20 @@
     var r = galWrap.getBoundingClientRect();
     if (!galPinned(r, vh)) return;
     galJumped = true;
-    instantScrollTo(r.top + window.scrollY + galStep() * galStage + 2);
+    var top = r.top + window.scrollY;
+    // on the last card park just shy of release, so the next scroll moves on
+    var target = galStage >= 6 ? top + (r.height - vh) - 60 : top + galStep() * galStage + 2;
+    instantScrollTo(target);
   }
   function deckAdvance() {
-    if (galStage >= 7) return; // stages 0–6 = cards, 7 = back to first (reset)
-    var prev = galStage % 7;
+    if (galStage >= 6) return; // 7 cards; the last one stays — no wrap-around
+    var prev = galStage;
     galStage += 1;
     flyGo(prev);
-    setGalIdx(galStage % 7);
-    galCooldownUntil = Date.now() + 550;
+    setGalIdx(galStage);
+    galArmed = false; // one advance per gesture
+    galCooldownUntil = Date.now() + 350;
     galAcc = 0;
-  }
-  function deckCollapseUp() {
-    galStage = 0;
-    setGalIdx(0);
-    galAcc = 0;
-    galJumped = true;
-    // park at the wrapper top: the next upward motion exits the section
-    instantScrollTo(galWrap.getBoundingClientRect().top + window.scrollY);
   }
   function deckPass(vh) {
     if (!galWrap || window.innerWidth >= 780) return;
@@ -354,20 +361,23 @@
     var lastP = galLastP; galLastP = gp;
     if (lastP === undefined) {
       // first pass (reload mid-deck via scroll restoration): map silently
-      galStage = Math.min(7, Math.floor(gp * 7.5));
-      setGalIdx(galStage % 7);
+      galStage = Math.min(6, Math.floor(gp * 7));
+      setGalIdx(galStage);
       return;
     }
     if (gp < lastP - 0.0005) {
-      // scrolling up: never un-swipe — reset to the first card and collapse
-      // the pin so the section releases on the next upward motion
-      if (gp > 0 && galStage > 0) deckCollapseUp();
-      else galAcc = 0;
+      // scrolling up: no flipping — keep the current card, park at the
+      // wrapper top so the section releases without a long climb
+      galAcc = 0;
+      if (galPinned(r, vh) && -r.top > 8) {
+        galJumped = true;
+        instantScrollTo(r.top + window.scrollY);
+      }
     } else if (gp > lastP + 0.0005 && galPinned(r, vh)) {
       galAcc += (gp - lastP) * total;
-      if (galAcc >= galStep() * 0.6) {
-        if (Date.now() >= galCooldownUntil) deckAdvance();
-        else galAcc = 0; // same flick's momentum: absorb it
+      if (galAcc >= galStep() * 0.5 && galStage < 6) {
+        if (galArmed && Date.now() >= galCooldownUntil) deckAdvance();
+        else galAcc = 0; // momentum from the same flick: absorb it
       }
       clearTimeout(galSyncT);
       galSyncT = setTimeout(galResync, 200);

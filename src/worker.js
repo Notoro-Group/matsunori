@@ -15,20 +15,20 @@ const FB_UA = 'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uat
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    if (url.pathname === '/api/news') return news(request, ctx);
+    if (url.pathname === '/api/news') return news(request, env, ctx);
     return env.ASSETS.fetch(request);
   },
 };
 
-async function news(request, ctx) {
+async function news(request, env, ctx) {
   const cache = caches.default;
-  const key = new Request(new URL('/api/news?v=7', request.url));
+  const key = new Request(new URL('/api/news?v=8', request.url));
   const hit = await cache.match(key);
   if (hit) return hit;
 
   let body, ttl = CACHE_SECONDS;
   try {
-    body = await buildFeed();
+    body = await buildFeed(env, request.url);
   } catch (err) {
     body = { error: 'feed-unavailable', detail: String((err && err.message) || err), items: [] };
     ttl = 300; // transient failure: retry soon
@@ -47,19 +47,27 @@ async function news(request, ctx) {
    Bing News RSS carries real publisher URLs and snippets inline. Fetch both,
    merge and dedupe by title, then og-scrape the publisher pages — article
    og:image is the same thumbnail Google News itself displays. */
-async function buildFeed() {
+async function buildFeed(env, baseUrl) {
   const [g, b] = await Promise.allSettled([fromGoogle(), fromBing()]);
   const gi = g.status === 'fulfilled' ? g.value : null;
   const bi = b.status === 'fulfilled' ? b.value : null;
-  if (!gi && !bi) throw (g.status === 'rejected' ? g.reason : new Error('no feeds'));
 
-  // bing first: on a title collision its copy wins — it already carries a
-  // publisher URL and snippet — but adopt the google copy's resolver token
-  // (and source name) so enrichment can still reach the original article
-  // when bing hands us a syndicated msn.com link
+  // the baked press archive (scripts/bake-news.mjs) carries resolved URLs,
+  // article images, and snippets gathered from a network Google and the
+  // publishers don't block — the live feeds layer on top of it
+  let baked = [];
+  try {
+    const br = await env.ASSETS.fetch(new URL('/data/news-baked.json', baseUrl));
+    if (br.ok) baked = (await br.json()).items || [];
+  } catch (e) { /* no archive baked yet */ }
+
+  if (!gi && !bi && !baked.length) throw (g.status === 'rejected' ? g.reason : new Error('no feeds'));
+
+  // bing first (publisher URL + snippet), google adds coverage and resolver
+  // tokens, baked entries fill history and upgrade metadata on collisions
   const byKey = new Map();
-  for (const it of [...(bi || []), ...(gi || [])]) {
-    const k = it.title.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  for (const it of [...(bi || []), ...(gi || []), ...baked]) {
+    const k = (it.title || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
     if (!k) continue;
     const prev = byKey.get(k);
     if (!prev) { byKey.set(k, it); continue; }
@@ -67,6 +75,12 @@ async function buildFeed() {
     if (!prev.sourceUrl && it.sourceUrl) prev.sourceUrl = it.sourceUrl;
     if (!prev.snippet && it.snippet) prev.snippet = it.snippet;
     if (!prev.source && it.source) prev.source = it.source;
+    if (!prev.date && it.date) prev.date = it.date;
+    if (it.image && it.imageType === 'article' && prev.imageType !== 'article') {
+      prev.image = it.image;
+      prev.imageType = it.imageType;
+    }
+    if ((isGoogle(prev.url) || isMsn(prev.url)) && it.url && !isGoogle(it.url) && !isMsn(it.url)) prev.url = it.url;
   }
   const items = [...byKey.values()];
   items.sort((a, z) => ((a.date || '') < (z.date || '') ? 1 : -1));
@@ -89,7 +103,7 @@ async function buildFeed() {
   return {
     updated: new Date().toISOString(),
     query: 'matsunori',
-    via: [gi && 'google', bi && 'bing'].filter(Boolean).join('+'),
+    via: [gi && 'google', bi && 'bing', baked.length && 'baked'].filter(Boolean).join('+'),
     items,
   };
 }
@@ -170,6 +184,8 @@ async function fromGoogle() {
 /* Resolve the publisher URL, then scrape og:image / og:description.
    Failures at any step simply leave the fallbacks in place. */
 async function enrich(it) {
+  // already complete (usually via the baked archive): nothing to fetch
+  if (!isGoogle(it.url) && !isMsn(it.url) && it.imageType === 'article' && it.snippet) return;
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), 9000);
   try {
@@ -185,7 +201,7 @@ async function enrich(it) {
     if (meta.finalUrl && !isGoogle(meta.finalUrl)) it.url = meta.finalUrl;
     if (meta.img && !/BB10piIP/i.test(meta.img)) { // msn's generic mosaic
       try {
-        it.image = new URL(meta.img, meta.finalUrl || it.url).href;
+        it.image = new URL(decodeEntities(meta.img), meta.finalUrl || it.url).href;
         it.imageType = 'article';
       } catch (e) { /* unresolvable relative URL */ }
     }
