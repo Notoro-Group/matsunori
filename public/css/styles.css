@@ -214,7 +214,7 @@ a.pill-row:hover { background: rgba(217, 164, 65, .07); }
 .news-hl:hover, .news-hl:focus-visible { border-color: rgba(217, 164, 65, .45); }
 .news-hl-logo { display: flex; align-items: center; height: 26px; color: var(--cream); }
 .news-hl-logo svg { height: 15px; width: auto; display: block; }
-.news-hl-logo svg[aria-label="Time Out"] { height: 26px; }
+.news-hl-logo svg[aria-label="Time Out"] { height: 18px; }
 .news-hl-logo svg[aria-label="The Infatuation"] { height: 13px; }
 .news-hl-wordmark { font: 500 12px var(--sans); letter-spacing: .34em; color: var(--cream); }
 .news-hl-quote { font: italic 400 clamp(16px, 1.8vw, 19px)/1.5 var(--serif); color: var(--rice); text-wrap: pretty; }
