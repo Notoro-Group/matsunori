@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>matsunori — handroll bar</title>
+<meta name="description" content="Matsunori is a temaki handroll bar in Boston (Fenway) and New York (Long Island City). Exceptional handrolls, served one at a time.">
+<meta name="theme-color" content="#0C0C0E">
+<link rel="icon" type="image/webp" href="assets/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400;0,500;0,600&family=Fragment+Mono&family=Zen+Old+Mincho:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Matsunori Handroll Bar — Fenway",
+  "servesCuisine": ["Japanese", "Sushi", "Temaki"],
+  "url": "https://matsunori.com",
+  "address": { "@type": "PostalAddress", "streetAddress": "900 Beacon St, Unit A", "addressLocality": "Boston", "addressRegion": "MA", "postalCode": "02215", "addressCountry": "US" },
+  "sameAs": ["https://www.instagram.com/matsunori.handrollbar/", "https://www.yelp.com/biz/matsunori-handroll-bar-boston-3"],
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "17:00", "closes": "22:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "17:00", "closes": "22:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "11:30", "closes": "14:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "16:00", "closes": "22:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "11:30", "closes": "14:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "16:00", "closes": "22:00" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Matsunori Handroll Bar — Long Island City",
+  "servesCuisine": ["Japanese", "Sushi", "Temaki"],
+  "url": "https://matsunori.com",
+  "address": { "@type": "PostalAddress", "streetAddress": "27-09 Thomson Ave", "addressLocality": "Long Island City", "addressRegion": "NY", "postalCode": "11101", "addressCountry": "US" },
+  "sameAs": ["https://www.instagram.com/matsunori.handrollbar/"],
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "17:00", "closes": "22:30" }
+  ]
+}
+</script>
+<noscript>
+<style>
+  .loader{display:none}
+  [data-lt] > span{transform:none !important}
+  .hero-sub{opacity:1 !important;transform:none !important}
+  .hero-kanji{max-height:340px !important}
+</style>
+</noscript>
+</head>
+<body>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-half loader-top"></div>
+  <div class="loader-half loader-bot"></div>
+  <div class="loader-seam"></div>
+  <div class="loader-tag">手巻き — ONE ROLL AT A TIME</div>
+</div>
+
+<div id="progress" aria-hidden="true"></div>
+
+<header class="nav">
+  <a href="#top" class="nav-brand">
+    <span class="nav-crest"><img src="assets/logo.webp" alt="Matsunori logo"></span>
+    <span>matsunori</span>
+  </a>
+  <nav class="nav-links" aria-label="Site">
+    <a href="#locations" class="nav-link">LOCATIONS</a>
+    <a href="#story" class="nav-link sec">STORY</a>
+    <a href="#wagyu" class="nav-link sec">WAGYU</a>
+    <a href="#gallery" class="nav-link sec">GALLERY</a>
+    <span class="pill" id="pill" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">
+      <span class="pill-dot" id="pill-dot"></span>
+      <span class="pill-label" id="pill-label">OPEN NOW</span>
+      <span class="pill-panel">
+        <span class="pill-panel-inner">
+          <a class="pill-row" href="https://maps.app.goo.gl/1uYDaBxGDzXBHC2P6" target="_blank" rel="noopener">
+            <span class="pill-city">FENWAY</span>
+            <span class="pill-note steam">WALK-INS ONLY</span>
+          </a>
+          <a class="pill-row" href="https://www.opentable.com" target="_blank" rel="noopener">
+            <span class="pill-city">LIC</span>
+            <span class="pill-note gold">RESERVE — OPENTABLE ↗</span>
+          </a>
+          <span class="pill-row static">
+            <span class="pill-city steam">LYNNFIELD</span>
+            <span class="pill-soon"><span class="pill-soon-dot"></span>OPENING SOON</span>
+          </span>
+        </span>
+      </span>
+    </span>
+  </nav>
+</header>
+
+<main>
+<section id="top" class="hero">
+  <video data-hero autoplay muted loop playsinline preload="auto" poster="assets/gallery/2.webp" src="https://cdn.matsunori.com/Banner%20Video%20V3%20(1)%20(1).mp4"></video>
+  <div class="hero-scrim"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-kanji" data-kanji>手巻き — 海苔</div>
+  <div class="hero-copy">
+    <h1 class="hero-title"><span data-lt><span>m</span></span><span data-lt><span>a</span></span><span data-lt><span>t</span></span><span data-lt><span>s</span></span><span data-lt><span>u</span></span><span data-lt><span>n</span></span><span data-lt><span>o</span></span><span data-lt><span>r</span></span><span data-lt><span>i</span></span></h1>
+    <div class="hero-sub hero-tag">HANDROLL BAR — BOSTON · NEW YORK</div>
+    <div class="hero-sub hero-line">One roll at a time.</div>
+  </div>
+  <div class="hero-cue"></div>
+</section>
+
+<section id="locations" class="locations">
+  <div class="section-head">
+    <h2 data-anim="words">Three counters</h2>
+    <span data-anim="fade" class="section-note">BOSTON WALKS IN — LIC TAKES RESERVATIONS</span>
+  </div>
+  <div class="loc-grid">
+    <a href="https://maps.app.goo.gl/1uYDaBxGDzXBHC2P6" target="_blank" rel="noopener" class="loc-card" data-loc="0" data-anim="wipe" data-dir="right">
+      <img src="assets/gallery/9.webp" alt="Matsunori Fenway" loading="lazy">
+      <div class="loc-shade"></div>
+      <div class="loc-copy">
+        <div class="loc-kicker">AUDUBON CIRCLE — BOSTON</div>
+        <div class="loc-name">Fenway</div>
+        <div class="loc-row">
+          <span class="loc-status"><span class="loc-dot" id="fenway-dot"></span><span class="loc-label" id="fenway-label">—</span></span>
+          <span class="loc-addr">900 BEACON ST, UNIT A →</span>
+        </div>
+        <div class="loc-foot">WALK-INS ONLY</div>
+      </div>
+    </a>
+    <div class="loc-card" data-loc="1" data-anim="wipe" data-dir="left" data-delay="120">
+      <img src="assets/gallery/1.webp" alt="Matsunori Long Island City" loading="lazy">
+      <div class="loc-shade"></div>
+      <div class="loc-copy">
+        <div class="loc-kicker">LONG ISLAND CITY — NEW YORK</div>
+        <div class="loc-name">LIC</div>
+        <div class="loc-row">
+          <span class="loc-status"><span class="loc-dot" id="lic-dot"></span><span class="loc-label" id="lic-label">—</span></span>
+          <a href="https://maps.app.goo.gl/eTR3m7itv4RwWF3A8" target="_blank" rel="noopener" class="loc-addr link">27-09 THOMSON AVE →</a>
+        </div>
+        <a href="https://www.opentable.com" target="_blank" rel="noopener" class="loc-reserve">RESERVE — OPENTABLE ↗</a>
+      </div>
+    </div>
+    <div class="loc-card" data-loc="2" data-anim="wipe" data-dir="left" data-delay="240">
+      <div class="loc-placeholder"><span>松</span></div>
+      <div class="loc-shade"></div>
+      <div class="loc-copy">
+        <div class="loc-kicker">MARKETSTREET — MASSACHUSETTS</div>
+        <div class="loc-name">Lynnfield</div>
+        <div class="loc-row">
+          <span class="loc-status"><span class="loc-dot red pulse"></span><span class="loc-label red">OPENING SOON</span></span>
+          <span class="loc-addr">DETAILS TO FOLLOW</span>
+        </div>
+        <div class="loc-foot">WALK-INS ONLY</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="anatomy-wrap" class="anatomy-wrap">
+  <div class="anatomy-pin">
+    <div id="anatomy-sweep" class="anatomy-sweep"></div>
+    <div class="anatomy-head">
+      <span class="anatomy-kicker">THE ANATOMY OF A HANDROLL</span>
+      <span class="anatomy-count"><span id="anat-num">01</span> / 03</span>
+    </div>
+    <div class="anatomy-kanji">手巻き</div>
+    <div class="anatomy-stage">
+      <img id="fold1" class="fold" src="assets/fold-1.png" alt="Step 1 — the fill">
+      <img id="fold2" class="fold" src="assets/fold-2.png" alt="Step 2 — the fold">
+      <img id="fold3" class="fold" src="assets/fold-3.png" alt="Step 3 — served">
+    </div>
+    <div class="anatomy-steps" aria-hidden="true">
+      <span class="anat-step"><span class="anat-rule"></span><span class="anat-step-label">01 — THE FILL</span></span>
+      <span class="anat-step"><span class="anat-rule"></span><span class="anat-step-label">02 — THE FOLD</span></span>
+      <span class="anat-step"><span class="anat-rule"></span><span class="anat-step-label">03 — THE HANDOFF</span></span>
+    </div>
+    <div class="anatomy-steps-m" aria-hidden="true">
+      <span class="anat-step-label">01 — FILL</span>
+      <span class="anat-step-label">02 — FOLD</span>
+      <span class="anat-step-label">03 — HANDOFF</span>
+    </div>
+    <div class="anatomy-caps">
+      <div class="anat-cap"><div><div class="anat-cap-line">The fill — a perfect 50/50 of rice and fish.</div><div class="anat-cap-note">RICE — HALF THE ROLL. NOT FILLER.</div></div></div>
+      <div class="anat-cap"><div><div class="anat-cap-line">The fold — rolled to order, never ahead.</div><div class="anat-cap-note">NORI STAYS CRISP — 30 SECONDS FROM HAND TO HAND.</div></div></div>
+      <div class="anat-cap"><div><div class="anat-cap-line em">Served one at a time. Eaten by hand.</div><div class="anat-cap-note">SKIP THE CHOPSTICKS.</div></div></div>
+    </div>
+    <div class="anatomy-prog"><div id="anat-prog"></div></div>
+    <div class="anatomy-tick t1"></div>
+    <div class="anatomy-tick t2"></div>
+  </div>
+</div>
+
+<section id="story" class="story">
+  <div class="story-row">
+    <div class="story-img" data-anim="wipe" data-dir="right"><img data-parallax src="assets/gallery/1.webp" alt="Chef at the counter" loading="lazy"><div class="story-shade"></div></div>
+    <div class="story-text">
+      <div data-anim="fade" class="story-kicker">THE STORY — 01</div>
+      <div data-anim="mask-rise" class="story-para">We opened our doors in February 2023 with a simple mission — to bring the highest-quality fish and the most generous portions to as many people as possible, at an exceptional value.</div>
+    </div>
+  </div>
+  <div class="story-row flip">
+    <div class="story-text">
+      <div data-anim="fade" class="story-kicker">THE STORY — 02</div>
+      <div data-anim="mask-rise" class="story-para">While most maki rolls are packed with rice and just a touch of fish, we’ve flipped that standard. Each roll is a perfect 50/50 balance of rice and fish — the ideal bite, every time.</div>
+    </div>
+    <div class="story-img" data-anim="wipe" data-dir="left"><img data-parallax src="assets/gallery/3.webp" alt="Handroll detail" loading="lazy"><div class="story-shade"></div></div>
+  </div>
+  <div class="story-quote">
+    <div data-anim="words" class="quote-line">“We’ve flipped that standard.”</div>
+    <div data-anim="draw-x" class="quote-rule"></div>
+    <div data-anim="fade" data-delay="350" class="quote-kicker">OUR MISSION — FEBRUARY 2023</div>
+  </div>
+  <div class="story-row">
+    <div class="story-img" data-anim="wipe" data-dir="right"><img data-parallax src="assets/gallery/5.webp" alt="House soy sauce" loading="lazy"><div class="story-shade"></div></div>
+    <div class="story-text">
+      <div data-anim="fade" class="story-kicker">THE STORY — 03</div>
+      <div data-anim="mask-rise" class="story-para">We make our soy sauce in-house, adding a touch of sweetness to complement its umami depth. And everything is served temaki-style — skip the chopsticks and eat the traditional way, by hand.</div>
+    </div>
+  </div>
+</section>
+
+<section id="wagyu" class="wagyu">
+  <div class="wagyu-mark" data-parallax data-pfactor="0.12">和牛</div>
+  <div class="wagyu-inner">
+    <div data-anim="fade" class="wagyu-kicker">THE WAGYU DOSSIER</div>
+    <h2 data-anim="words">Proof, on paper.</h2>
+    <div class="wagyu-table">
+      <div data-anim="row" class="wagyu-row"><span class="wagyu-key">PARTNER</span><span class="wagyu-val">WAGYU MASTER — S FOODS INC.</span></div>
+      <div data-anim="row" data-delay="120" class="wagyu-row"><span class="wagyu-key">TRACEABILITY</span><span class="wagyu-val">LINEAGE VERIFIED — JAPAN NATIONAL SYSTEM</span></div>
+      <div data-anim="row" data-delay="240" class="wagyu-row"><span class="wagyu-key">GRADE</span><span class="wagyu-val">A5 — JAPAN MEAT GRADING ASSOC.</span></div>
+    </div>
+    <div data-anim="mask-rise" data-delay="200" class="wagyu-para">Every cut is born, raised and graded in Japan, and arrives with its certificate. The originals hang by the counter — <span class="em">ask to see them; they’re always on display.</span></div>
+    <div data-anim="stamp" data-delay="420" class="wagyu-seal"><span>A5</span></div>
+  </div>
+</section>
+
+<section class="press">
+  <div data-anim="fade" class="press-kicker">PRESS</div>
+  <div data-anim="words" class="press-quote">“A sushi destination entirely devoted to hand rolls… New England seafood front and center.”</div>
+  <div data-anim="draw-x" class="quote-rule"></div>
+  <div data-anim="tracking" class="press-outlet">THRILLIST</div>
+</section>
+
+<section id="gallery" class="gallery">
+  <div class="gallery-head">
+    <span data-anim="fade">GALLERY — 01–07</span>
+    <span data-anim="fade"><span class="hint-desktop">SCROLL →</span><span class="hint-mobile">ONE AT A TIME</span></span>
+  </div>
+
+  <div class="gallery-strip-wrap">
+    <div class="gallery-hairline"></div>
+    <div class="gallery-strip">
+      <div class="g-item" data-anim="wipe" data-dir="right"><img src="assets/gallery/2.webp" alt="The counter" loading="lazy"><span>01</span></div>
+      <div class="g-item" data-anim="wipe" data-dir="right" data-delay="90"><img src="assets/gallery/6.webp" alt="Toasted to order" loading="lazy"><span>02</span></div>
+      <div class="g-item" data-anim="wipe" data-dir="right" data-delay="180"><img src="assets/gallery/5.webp" alt="House soy" loading="lazy"><span>03</span></div>
+      <div class="g-item" data-anim="wipe" data-dir="right" data-delay="270"><img src="assets/gallery/7.webp" alt="Hokkaido uni" loading="lazy"><span>04</span></div>
+      <div class="g-item" data-anim="wipe" data-dir="right" data-delay="360"><img src="assets/gallery/9.webp" alt="Fenway" loading="lazy"><span>05</span></div>
+      <div class="g-item" data-anim="wipe" data-dir="right" data-delay="450"><img src="assets/gallery/1.webp" alt="The first roll" loading="lazy"><span>06</span></div>
+      <div class="g-item" data-anim="wipe" data-dir="right" data-delay="540"><img src="assets/gallery/3.webp" alt="Crisp nori" loading="lazy"><span>07</span></div>
+    </div>
+  </div>
+
+  <div id="gal-wrap" class="deck-wrap">
+    <div class="deck-pin">
+      <div class="deck-under"><img id="gal-under" src="assets/gallery/6.webp" alt=""><div class="deck-under-shade"></div></div>
+      <div id="gal-fly" class="deck-fly"><img id="gal-fly-img" src="assets/gallery/2.webp" alt=""></div>
+      <div id="gal-card" class="deck-card">
+        <img id="gal-img" src="assets/gallery/2.webp" alt="From the counter" draggable="false">
+        <div class="deck-scrim-top"></div>
+        <div class="deck-scrim-bot"></div>
+        <div class="deck-caption">
+          <div class="deck-title" id="gal-caption">The counter</div>
+          <div class="deck-num"><span id="gal-num">01</span> / 07 — FROM THE COUNTER</div>
+        </div>
+        <div class="deck-segs" id="gal-segs"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="deck-oishii" id="gal-oishii">OISHII</div>
+      </div>
+      <div class="deck-heart" id="gal-heart"><svg width="96" height="86" viewBox="0 0 32 29"><path d="M16 29S0 19 0 8.6C0 3.9 3.7 0 8.4 0 11.6 0 14.5 1.9 16 4.7 17.5 1.9 20.4 0 23.6 0 28.3 0 32 3.9 32 8.6 32 19 16 29 16 29Z" fill="#B33A32"></path></svg></div>
+      <div class="deck-hint-wrap"><span class="deck-hint" id="gal-hint">KEEP SCROLLING <span class="cue">↓</span> OR SWIPE RIGHT <span class="nudge">→</span></span></div>
+    </div>
+  </div>
+</section>
+
+<div class="interstitial"><span data-anim="words">Walk-ins only. Worth it.</span></div>
+</main>
+
+<footer class="footer">
+  <div class="footer-kanji">マツノリ</div>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div>
+        <div class="footer-wordmark">matsunori</div>
+        <div class="footer-est">EST. FEBRUARY 2023 — BOSTON</div>
+      </div>
+      <div data-anim="stamp" class="footer-seal"><span>松</span></div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col"><span class="footer-h">LOCATIONS</span><a href="https://maps.app.goo.gl/1uYDaBxGDzXBHC2P6" target="_blank" rel="noopener">FENWAY</a><a href="https://maps.app.goo.gl/eTR3m7itv4RwWF3A8" target="_blank" rel="noopener">LIC</a><span class="footer-h">LYNNFIELD — SOON</span></div>
+      <div class="footer-col"><span class="footer-h">FOLLOW</span><a href="https://www.instagram.com/matsunori.handrollbar/" target="_blank" rel="noopener">INSTAGRAM</a><a href="https://www.yelp.com/biz/matsunori-handroll-bar-boston-3" target="_blank" rel="noopener">YELP</a><a href="https://maps.app.goo.gl/1uYDaBxGDzXBHC2P6" target="_blank" rel="noopener">GOOGLE</a></div>
+      <div class="footer-col"><span class="footer-h">FAMILY</span><a href="https://mai.boston" target="_blank" rel="noopener">MAI IZAKAYA</a><a href="https://notoro.group" target="_blank" rel="noopener">NOTORO GROUP</a></div>
+    </div>
+  </div>
+  <div class="footer-bar"><span>© mmxxvi matsunori — handroll bar</span><span>one roll at a time</span></div>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>
