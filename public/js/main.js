@@ -267,7 +267,7 @@
   var galHeart = $('#gal-heart'), galHint = $('#gal-hint'), galOishii = $('#gal-oishii');
   var galIdx = 0, galStage = 0, galLastP;
   var galAcc = 0, galCooldownUntil = 0, galJumped = false, galSyncT = null;
-  var galArmed = false, galWheelT = 0;
+  var galArmed = false, galWheelT = 0, galRewindT = null;
   var heartT = null, heartOn = false;
   var gDrag = false, gMode = null, gx = 0, gy = 0, gdx = 0;
 
@@ -336,10 +336,13 @@
     var vh = window.innerHeight;
     var r = galWrap.getBoundingClientRect();
     if (!galPinned(r, vh)) return;
-    galJumped = true;
     var top = r.top + window.scrollY;
     // on the last card park just shy of release, so the next scroll moves on
     var target = galStage >= 6 ? top + (r.height - vh) - 60 : top + galStep() * galStage + 2;
+    // forward only: an upward programmatic scroll makes mobile browsers
+    // re-show their toolbar (they read it as user scrolling up)
+    if (target <= window.scrollY) return;
+    galJumped = true;
     instantScrollTo(target);
   }
   function deckAdvance() {
@@ -351,6 +354,28 @@
     galArmed = false; // one advance per gesture
     galCooldownUntil = Date.now() + 350;
     galAcc = 0;
+  }
+  // scroll up: one rewind animation, all the way back to the first card —
+  // the fly layer returns from the right carrying card 1, then lands
+  function deckRewind() {
+    if (galStage === 0 && (galIdx === 0 || galRewindT !== null)) return;
+    galStage = 0;
+    galAcc = 0;
+    if (reduced) { setGalIdx(0); return; }
+    galFlyImg.src = GAL[0];
+    galFly.style.transition = 'none';
+    galFly.style.transform = 'translate(120vw,40px) rotate(9deg)';
+    void galFly.offsetWidth;
+    galFly.style.transition = 'transform .5s ' + EASE;
+    galFly.style.transform = 'translate(0,0) rotate(0deg)';
+    clearTimeout(galRewindT);
+    galRewindT = setTimeout(function () {
+      galRewindT = null;
+      if (galStage !== 0) return; // user scrolled down again mid-rewind
+      setGalIdx(0); // same image as the landed fly: seamless swap
+      galFly.style.transition = 'none';
+      galFly.style.transform = 'translateX(120vw)';
+    }, 520);
   }
   function deckPass(vh) {
     if (!galWrap || window.innerWidth >= 780) return;
@@ -366,12 +391,15 @@
       return;
     }
     if (gp < lastP - 0.0005) {
-      // scrolling up: no flipping — keep the current card, park at the
-      // wrapper top so the section releases without a long climb
+      // scrolling up: rewind to the first card in one animation and park at
+      // the wrapper top so the section releases without a long climb
       galAcc = 0;
-      if (galPinned(r, vh) && -r.top > 8) {
-        galJumped = true;
-        instantScrollTo(r.top + window.scrollY);
+      if (galPinned(r, vh)) {
+        deckRewind();
+        if (-r.top > 8) {
+          galJumped = true;
+          instantScrollTo(r.top + window.scrollY);
+        }
       }
     } else if (gp > lastP + 0.0005 && galPinned(r, vh)) {
       galAcc += (gp - lastP) * total;
