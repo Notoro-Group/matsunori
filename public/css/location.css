@@ -79,6 +79,9 @@
 .menu-name { font: 400 clamp(17px, 1.9vw, 20px) var(--serif); color: var(--rice); white-space: nowrap; }
 .menu-name .jp { font: 400 .72em var(--jpfont); color: var(--steam); margin-left: 8px; letter-spacing: .1em; }
 .menu-item.sig .menu-name::before { content: ''; display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--uni); margin-right: 10px; vertical-align: 3px; }
+.fav-heart { color: var(--akami); font-size: .78em; margin-right: 8px; vertical-align: 1px; }
+.menu-mark { font: 400 9.5px var(--mono); color: var(--steam); margin-left: 6px; letter-spacing: .06em; vertical-align: 3px; }
+.menu-add { margin-top: 4px; font: italic 400 12px var(--serif); color: var(--akami); }
 .menu-leader { flex: 1; border-bottom: 1px dotted rgba(138, 133, 120, .35); transform: translateY(-4px); min-width: 24px; }
 .menu-price { font: 400 12px var(--mono); color: var(--rice); font-variant-numeric: tabular-nums; }
 .menu-desc { margin-top: 5px; font: 400 12.5px/1.6 var(--sans); color: var(--cream2); max-width: 560px; }
