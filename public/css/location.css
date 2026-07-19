@@ -10,6 +10,7 @@
 .loc-statusline .label { font: 400 11px var(--mono); letter-spacing: .08em; color: var(--steam); }
 .loc-addr-line { margin-top: 12px; font: 400 10px var(--mono); letter-spacing: .18em; color: var(--cream2); }
 .loc-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.head-hours { max-width: 560px; margin-top: 24px; }
 .loc-btn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(138, 133, 120, .4); padding: 10px 16px; border-radius: 2px; font: 500 9.5px var(--mono); letter-spacing: .2em; color: var(--cream2); transition: border-color .25s, color .25s; }
 .loc-btn:hover, .loc-btn:focus-visible { border-color: rgba(217, 164, 65, .7); color: var(--uni); }
 .loc-btn.gold { border-color: rgba(217, 164, 65, .55); color: var(--uni); }
@@ -18,7 +19,7 @@
 /* ---------- photo band ---------- */
 .loc-band { position: relative; height: clamp(220px, 36vw, 380px); overflow: hidden; border-top: 1px solid var(--hair18); border-bottom: 1px solid var(--hair18); }
 .band-plx { position: absolute; inset: -8% 0; width: 100%; height: 116%; }
-.band-plx img { width: 100%; height: 100%; object-fit: cover; display: block; animation: mtnSlowZoom 30s ease-in-out infinite alternate; }
+.band-plx img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .loc-band-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12, 12, 14, .5), rgba(12, 12, 14, .25) 45%, rgba(12, 12, 14, .55)); }
 
 /* ---------- sections ---------- */
@@ -87,6 +88,12 @@
 .menu-price { font: 400 12px var(--mono); color: var(--rice); font-variant-numeric: tabular-nums; }
 .menu-desc { margin-top: 5px; font: 400 12.5px/1.6 var(--sans); color: var(--cream2); max-width: 560px; }
 .menu-foot { margin-top: 22px; font: 400 9px var(--mono); letter-spacing: .2em; color: var(--steam); }
+.menu-embed { max-width: 860px; margin-top: clamp(24px, 3vw, 36px); }
+.menu-sheet { display: block; border: 1px solid var(--hair25); overflow: hidden; background: var(--rice); transition: border-color .3s; }
+.menu-sheet:hover, .menu-sheet:focus-visible { border-color: rgba(217, 164, 65, .5); }
+.menu-sheet img { display: block; width: 100%; height: auto; }
+.menu-embed-foot { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 14px; }
+.menu-embed-note { font: 400 9px var(--mono); letter-spacing: .2em; color: var(--steam); }
 
 /* ---------- reviews ---------- */
 .review-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: clamp(14px, 2vw, 22px); max-width: 640px; margin-top: clamp(24px, 3vw, 36px); }

@@ -74,6 +74,7 @@
     <a href="/#story" class="nav-link sec">STORY</a>
     <a href="/#wagyu" class="nav-link sec">WAGYU</a>
     <a href="/#gallery" class="nav-link sec">GALLERY</a>
+    <a href="https://www.instagram.com/matsunori.handrollbar/" target="_blank" rel="noopener" class="nav-ig" aria-label="Matsunori on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" xmlns="http://www.w3.org/2000/svg"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.2"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
     <span class="pill" id="pill" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">
       <span class="pill-dot" id="pill-dot"></span>
       <span class="pill-label" id="pill-label">OPEN NOW</span>
@@ -105,12 +106,17 @@
     <span class="dot" data-loc-dot></span>
     <span class="label" data-loc-status>—</span>
   </div>
-  <div class="loc-addr-line" data-anim="fade" data-delay="180">27-09 THOMSON AVE — LONG ISLAND CITY, NY 11101</div>
-  <div class="loc-actions" data-anim="fade" data-delay="260">
+  <div class="head-hours" data-anim="fade" data-delay="160">
+    <div class="hours-table">
+      <div class="hours-row" data-day="0,1,2,3,4,5,6"><span class="hours-day">Monday — Sunday<span class="hours-today-tag">— TODAY</span></span><span class="hours-times">5:00 — 10:30 PM</span></div>
+    </div>
+    <div class="hours-notes">KITCHEN CLOSES 30 MINUTES BEFORE CLOSE<br>WALK-INS &amp; RESERVATIONS WELCOME</div>
+  </div>
+  <div class="loc-addr-line" data-anim="fade" data-delay="220">27-09 THOMSON AVE — LONG ISLAND CITY, NY 11101</div>
+  <div class="loc-actions" data-anim="fade" data-delay="280">
     <a class="loc-btn gold" href="https://www.opentable.com/restref/client/?rid=1488412&restref=1488412&lang=en-US&ot_source=Restaurant%20website" target="_blank" rel="noopener">RESERVE — OPENTABLE ↗</a>
     <a class="loc-btn" href="https://maps.app.goo.gl/eTR3m7itv4RwWF3A8" target="_blank" rel="noopener">DIRECTIONS ↗</a>
-    <a class="loc-btn" href="tel:+13473965091">CALL — (347) 396-5091</a>
-    <a class="loc-btn" href="mailto:lic@matsunori.com">EMAIL</a>
+    <a class="loc-btn" href="#menu">MENU</a>
   </div>
 </header>
 
@@ -143,37 +149,6 @@
   <div class="loc-band-shade"></div>
 </div>
 
-<section class="loc-section" id="hours">
-  <div data-anim="fade" class="loc-section-kicker">HOURS</div>
-  <h2 data-anim="words">Dining &amp; delivery</h2>
-  <div class="loc-cols">
-    <div>
-      <div class="hours-block-kicker" data-anim="fade">WALK-IN DINING</div>
-      <div class="hours-table" data-anim="fade">
-        <div class="hours-row" data-day="0,1,2,3,4,5,6">
-          <span class="hours-day">Monday — Sunday<span class="hours-today-tag">— TODAY</span></span>
-          <span class="hours-times">5:00 — 10:30 PM</span>
-        </div>
-      </div>
-      <div class="hours-notes">KITCHEN CLOSES 30 MINUTES BEFORE CLOSE<br>WALK-INS &amp; RESERVATIONS WELCOME</div>
-    </div>
-    <div>
-      <div class="hours-block-kicker" data-anim="fade">ONLINE DELIVERY</div>
-      <div class="hours-table" data-anim="fade">
-        <div class="hours-row">
-          <span class="hours-day">Lunch</span>
-          <span class="hours-times">11:00 AM — 2:00 PM</span>
-        </div>
-        <div class="hours-row">
-          <span class="hours-day">Dinner</span>
-          <span class="hours-times">5:00 — 10:00 PM</span>
-        </div>
-      </div>
-      <div class="hours-notes">LUNCH IS SERVED EXCLUSIVELY VIA ONLINE DELIVERY</div>
-    </div>
-  </div>
-</section>
-
 <section class="loc-section" id="reserve">
   <div data-anim="fade" class="loc-section-kicker">RESERVATIONS</div>
   <h2 data-anim="words">Book the counter</h2>
@@ -190,6 +165,17 @@
   <div data-anim="fade" class="loc-section-kicker">ORDER IN</div>
   <h2 data-anim="words">Delivery &amp; pickup</h2>
   <p class="loc-note-para" data-anim="fade">Lunch is served exclusively via online delivery. Phone orders are always welcome for pickup.</p>
+  <div class="loc-cols" style="margin-top:0">
+    <div>
+      <div class="hours-block-kicker" data-anim="fade">ONLINE DELIVERY HOURS</div>
+      <div class="hours-table" data-anim="fade">
+        <div class="hours-row"><span class="hours-day">Lunch</span><span class="hours-times">11:00 AM — 2:00 PM</span></div>
+        <div class="hours-row"><span class="hours-day">Dinner</span><span class="hours-times">5:00 — 10:00 PM</span></div>
+      </div>
+      <div class="hours-notes">LUNCH IS SERVED EXCLUSIVELY VIA ONLINE DELIVERY</div>
+    </div>
+  </div>
+
   <div class="order-links" data-anim="fade">
     <a class="loc-btn" href="https://www.ubereats.com/store/matsunori-handroll-bar/g4KRb7bRUZeS8xfx-vJ_Ww" target="_blank" rel="noopener">UBER EATS ↗</a>
     <a class="loc-btn" href="https://www.grubhub.com/restaurant/matsunori-27-09-thomson-avenue-long-island-city/11561616" target="_blank" rel="noopener">GRUBHUB ↗</a>
@@ -220,108 +206,15 @@
 <section class="loc-section" id="menu">
   <div data-anim="fade" class="loc-section-kicker">MENU — LONG ISLAND CITY</div>
   <h2 data-anim="words">Served one at a time</h2>
-  <div class="menu-cat">
-    <div class="menu-cat-head" data-anim="fade">
-      <span class="menu-cat-name">Add-ons</span>
-      <span class="menu-cat-note"></span>
-    </div>
-    <div class="menu-items">
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Add caviar to any roll</span><span class="menu-leader"></span><span class="menu-price">9</span></div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Add spicy mayo on the side</span><span class="menu-leader"></span><span class="menu-price">1</span></div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Add eel sauce on the side</span><span class="menu-leader"></span><span class="menu-price">1</span></div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Add avocado</span><span class="menu-leader"></span><span class="menu-price">0.5</span></div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Add cucumber</span><span class="menu-leader"></span><span class="menu-price">0.5</span></div></div>
+  <div class="menu-embed" data-anim="fade">
+    <a class="menu-sheet" href="/assets/menu-lic.pdf" target="_blank" rel="noopener" aria-label="Open the full Long Island City menu as a PDF">
+      <img src="/assets/menu-lic.webp" alt="Matsunori Long Island City menu" loading="lazy">
+    </a>
+    <div class="menu-embed-foot">
+      <span class="menu-embed-note">TAP THE MENU TO OPEN THE FULL PDF</span>
+      <a class="loc-btn gold" href="/assets/menu-lic.pdf" target="_blank" rel="noopener">DOWNLOAD MENU (PDF) ↗</a>
     </div>
   </div>
-  <div class="menu-cat">
-    <div class="menu-cat-head" data-anim="fade">
-      <span class="menu-cat-name">Apps</span>
-      <span class="menu-cat-note"></span>
-    </div>
-    <div class="menu-items">
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Chawanmushi</span><span class="menu-leader"></span><span class="menu-price">6.5</span></div><div class="menu-desc">Steamed egg, marinated ikura, scallion</div><div class="menu-add">Add hokkaido uni + 9.0</div><div class="menu-add">Add kaluga hybrid caviar + 9.0</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Tofu Miso Soup</span><span class="menu-leader"></span><span class="menu-price">5</span></div><div class="menu-desc">Tofu, seaweed, scallion</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name"><span class="fav-heart" aria-label="Matsu favorite">♥</span>Salmon Cups<span class="menu-mark">*</span></span><span class="menu-leader"></span><span class="menu-price">9.5</span></div><div class="menu-desc">Salmon, avocado, tamago, masago, spicy mayo, crunchy cup, truffle pâté</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Truffle Edamame<span class="menu-mark">(V)</span></span><span class="menu-leader"></span><span class="menu-price">9</span></div><div class="menu-desc">Edamame, truffle oil, truffle pâté</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name"><span class="fav-heart" aria-label="Matsu favorite">♥</span>Seaweed Salad<span class="menu-mark">(V)</span></span><span class="menu-leader"></span><span class="menu-price">9</span></div><div class="menu-desc">Mixed seaweed, cucumber, sesame seeds</div></div>
-    </div>
-  </div>
-  <div class="menu-cat">
-    <div class="menu-cat-head" data-anim="fade">
-      <span class="menu-cat-name">Classics</span>
-      <span class="menu-cat-note">HAND ROLLS</span>
-    </div>
-    <div class="menu-items">
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Salmon<span class="menu-mark">*</span></span><span class="menu-leader"></span><span class="menu-price">7.5</span></div><div class="menu-desc">Salmon, toasted sesame seeds</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name"><span class="fav-heart" aria-label="Matsu favorite">♥</span>Mango Salmon<span class="menu-mark">*</span></span><span class="menu-leader"></span><span class="menu-price">8</span></div><div class="menu-desc">Salmon, spicy mayo, mango salsa, scallion</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Spicy Salmon<span class="menu-mark">*</span></span><span class="menu-leader"></span><span class="menu-price">8</span></div><div class="menu-desc">Salmon, spicy mayo, furikake</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Yellowfin Tuna<span class="menu-mark">*</span></span><span class="menu-leader"></span><span class="menu-price">7.5</span></div><div class="menu-desc">Yellowfin tuna, scallion</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name"><span class="fav-heart" aria-label="Matsu favorite">♥</span>Spicy Tuna<span class="menu-mark">*</span></span><span class="menu-leader"></span><span class="menu-price">8</span></div><div class="menu-desc">Tuna, spicy mayo, fried sweet potato, furikake</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Yellowtail<span class="menu-mark">*</span></span><span class="menu-leader"></span><span class="menu-price">7.5</span></div><div class="menu-desc">Yellowtail, rice puffs, scallion</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Spicy Yellowtail<span class="menu-mark">*</span></span><span class="menu-leader"></span><span class="menu-price">8</span></div><div class="menu-desc">Yellowtail, furikake, jalapeño, spicy mayo</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Truffle Avocado<span class="menu-mark">(V)</span></span><span class="menu-leader"></span><span class="menu-price">6.5</span></div><div class="menu-desc">Avocado, truffle pâté, fried sweet potato</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Spicy Cucumber<span class="menu-mark">(V)</span></span><span class="menu-leader"></span><span class="menu-price">6.5</span></div><div class="menu-desc">Cucumber, ssamjang, sesame seeds</div></div>
-    </div>
-  </div>
-  <div class="menu-cat">
-    <div class="menu-cat-head" data-anim="fade">
-      <span class="menu-cat-name">Signatures</span>
-      <span class="menu-cat-note">HAND ROLLS</span>
-    </div>
-    <div class="menu-items">
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Ikura<span class="menu-mark">*</span></span><span class="menu-leader"></span><span class="menu-price">11</span></div><div class="menu-desc">Marinated salmon roe, cucumber, lime zest</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Salmon Ikura<span class="menu-mark">*</span></span><span class="menu-leader"></span><span class="menu-price">11</span></div><div class="menu-desc">Salmon, marinated salmon roe, lime zest</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name"><span class="fav-heart" aria-label="Matsu favorite">♥</span>Eel</span><span class="menu-leader"></span><span class="menu-price">11</span></div><div class="menu-desc">Eel, kabayaki sauce, ginger, scallion</div><div class="menu-add">Sub foie gras, strawberry yuzu kosho, garlic chips + 5.5</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Spicy Blue Crab</span><span class="menu-leader"></span><span class="menu-price">11</span></div><div class="menu-desc">Blue crab, onion mix, avocado, spicy mayo, sesame seeds</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Mango Shrimp Tempura</span><span class="menu-leader"></span><span class="menu-price">11</span></div><div class="menu-desc">Shrimp tempura, mango salsa</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Spicy Shrimp Tempura</span><span class="menu-leader"></span><span class="menu-price">11</span></div><div class="menu-desc">Shrimp tempura, spicy mayo, tamago, avocado, masago</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name"><span class="fav-heart" aria-label="Matsu favorite">♥</span>Miso Butter Cod</span><span class="menu-leader"></span><span class="menu-price">11</span></div><div class="menu-desc">72 hr marinated black cod, Matsu miso butter cream</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Ankimo Jelly</span><span class="menu-leader"></span><span class="menu-price">11</span></div><div class="menu-desc">Monkfish liver, ponzu jelly, cucumber, rice puffs</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Snow Crab (Cali Roll)</span><span class="menu-leader"></span><span class="menu-price">11</span></div><div class="menu-desc">Snow crab leg, mayo, cucumber, avocado, masago, tamago</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name"><span class="fav-heart" aria-label="Matsu favorite">♥</span>Spicy Scallop<span class="menu-mark">*</span></span><span class="menu-leader"></span><span class="menu-price">11</span></div><div class="menu-desc">Scallop, spicy mayo, masago, tobiko</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Scallop<span class="menu-mark">*</span></span><span class="menu-leader"></span><span class="menu-price">11</span></div><div class="menu-desc">Scallop, cucumber, sea salt, lime zest</div></div>
-    </div>
-  </div>
-  <div class="menu-cat">
-    <div class="menu-cat-head" data-anim="fade">
-      <span class="menu-cat-name">Specials</span>
-      <span class="menu-cat-note">HAND ROLLS</span>
-    </div>
-    <div class="menu-items">
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Botan Ebi Ikura<span class="menu-mark">*</span></span><span class="menu-leader"></span><span class="menu-price">14</span></div><div class="menu-desc">Raw sweet shrimp, marinated salmon roe, lime zest</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Foie Gras Handroll</span><span class="menu-leader"></span><span class="menu-price">16.5</span></div><div class="menu-desc">Torched foie gras, garlic chips, apple compote</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name"><span class="fav-heart" aria-label="Matsu favorite">♥</span>The Lobster Roll<span class="menu-mark">*</span></span><span class="menu-leader"></span><span class="menu-price">16</span></div><div class="menu-desc">Lobster, Matsu miso butter, scallion</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Toro Mushroom<span class="menu-mark">*</span></span><span class="menu-leader"></span><span class="menu-price">17.5</span></div><div class="menu-desc">Bluefin tuna belly, BBQ shiitake mushroom</div><div class="menu-add">Sub hokkaido uni + 9.0</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name"><span class="fav-heart" aria-label="Matsu favorite">♥</span>Garlic Koji Toro<span class="menu-mark">*</span></span><span class="menu-leader"></span><span class="menu-price">19</span></div><div class="menu-desc">Bluefin tuna belly, takuan, koji garlic mix, caviar</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">KBBQ Wagyu</span><span class="menu-leader"></span><span class="menu-price">18</span></div><div class="menu-desc">A5 wagyu, ssamjang, sesame, scallion</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name"><span class="fav-heart" aria-label="Matsu favorite">♥</span>A5 Miyazaki Wagyu</span><span class="menu-leader"></span><span class="menu-price">18</span></div><div class="menu-desc">A5 Japanese kuroge wagyu, garlic mayo, sweet potato crisps</div><div class="menu-add">Sub foie gras, apple compote, garlic chips + 5.5</div><div class="menu-add">Sub hokkaido uni + 9.0</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name"><span class="fav-heart" aria-label="Matsu favorite">♥</span>Caviar Handroll<span class="menu-mark">*</span></span><span class="menu-leader"></span><span class="menu-price">19.5</span></div><div class="menu-desc">Highest-grade kaluga hybrid caviar</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name"><span class="fav-heart" aria-label="Matsu favorite">♥</span>Uni<span class="menu-mark">*</span></span><span class="menu-leader"></span><span class="menu-price">MP</span></div><div class="menu-desc">Sea urchin, wasabi, scallion, truffle pâté</div></div>
-    </div>
-  </div>
-  <div class="menu-cat">
-    <div class="menu-cat-head" data-anim="fade">
-      <span class="menu-cat-name">Dessert</span>
-      <span class="menu-cat-note"></span>
-    </div>
-    <div class="menu-items">
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Mochi Ice Cream (Matcha)</span><span class="menu-leader"></span><span class="menu-price">5.5</span></div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Matcha Tiramisu</span><span class="menu-leader"></span><span class="menu-price">9.5</span></div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Crème Brûlée</span><span class="menu-leader"></span><span class="menu-price">9.5</span></div></div>
-    </div>
-  </div>
-  <div class="menu-cat">
-    <div class="menu-cat-head" data-anim="fade">
-      <span class="menu-cat-name">Drinks</span>
-      <span class="menu-cat-note"></span>
-    </div>
-    <div class="menu-items">
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Soda</span><span class="menu-leader"></span><span class="menu-price">2</span></div><div class="menu-desc">Coke, Diet Coke, Ginger Ale</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Saratoga Spring</span><span class="menu-leader"></span><span class="menu-price">9</span></div><div class="menu-desc">Still or sparkling mineral water</div></div>
-      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Yuzu</span><span class="menu-leader"></span><span class="menu-price">5.5</span></div><div class="menu-desc">All natural yuzu sparkling juice</div></div>
-    </div>
-  </div>
-  <div class="menu-foot" data-anim="fade">♥ MATSU FAVORITE · (V) VEGETARIAN · *CONSUMING RAW OR UNDERCOOKED MEAT, SEAFOOD, SHELLFISH, OR EGGS MAY INCREASE YOUR RISK OF FOODBORNE ILLNESS · A GRATUITY OF 20% APPLIES TO PARTIES OF FIVE OR MORE · DELIVERY MENU AND PRICING MAY DIFFER ON PLATFORM APPS</div>
 </section>
 
 <section class="loc-section" id="faq">
@@ -384,7 +277,7 @@
   <span class="loc-bar-status" data-bar-status>—</span>
   <span class="loc-bar-links">
     <a class="loc-btn gold" href="https://www.opentable.com/restref/client/?rid=1488412&restref=1488412&lang=en-US&ot_source=Restaurant%20website" target="_blank" rel="noopener">RESERVE</a>
-    <a class="loc-btn" href="tel:+13473965091">CALL</a>
+    <a class="loc-btn" href="#menu">MENU</a>
   </span>
 </div>
 
