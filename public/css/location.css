@@ -17,7 +17,8 @@
 
 /* ---------- photo band ---------- */
 .loc-band { position: relative; height: clamp(220px, 36vw, 380px); overflow: hidden; border-top: 1px solid var(--hair18); border-bottom: 1px solid var(--hair18); }
-.loc-band img { position: absolute; inset: -8% 0; width: 100%; height: 116%; object-fit: cover; }
+.band-plx { position: absolute; inset: -8% 0; width: 100%; height: 116%; }
+.band-plx img { width: 100%; height: 100%; object-fit: cover; display: block; animation: mtnSlowZoom 30s ease-in-out infinite alternate; }
 .loc-band-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12, 12, 14, .5), rgba(12, 12, 14, .25) 45%, rgba(12, 12, 14, .55)); }
 
 /* ---------- sections ---------- */

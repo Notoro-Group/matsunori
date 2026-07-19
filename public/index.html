@@ -155,7 +155,7 @@
   </div>
   <div class="loc-grid">
     <a href="/fenway" class="loc-card" data-loc="0" data-anim="wipe" data-dir="right">
-      <img src="assets/gallery/9.webp" alt="Matsunori Fenway" loading="lazy">
+      <div class="loc-zoom"><img src="assets/gallery/9.webp" alt="Matsunori Fenway" loading="lazy"></div>
       <div class="loc-shade"></div>
       <div class="loc-copy">
         <div class="loc-kicker">AUDUBON CIRCLE — BOSTON</div>
@@ -170,7 +170,7 @@
     </a>
     <div class="loc-card" data-loc="1" data-anim="wipe" data-dir="left" data-delay="120">
       <a class="loc-stretch" href="/lic" aria-label="LIC — location page"></a>
-      <img src="assets/gallery/1.webp" alt="Matsunori Long Island City" loading="lazy">
+      <div class="loc-zoom"><img src="assets/gallery/1.webp" alt="Matsunori Long Island City" loading="lazy"></div>
       <div class="loc-shade"></div>
       <div class="loc-copy">
         <div class="loc-kicker">LONG ISLAND CITY — NEW YORK</div>
@@ -235,7 +235,7 @@
 
 <section id="story" class="story">
   <div class="story-row">
-    <div class="story-img" data-anim="wipe" data-dir="right"><img data-parallax src="assets/gallery/1.webp" alt="Chef at the counter" loading="lazy"><div class="story-shade"></div></div>
+    <div class="story-img" data-anim="wipe" data-dir="right"><div class="story-plx" data-parallax><img src="assets/gallery/1.webp" alt="Chef at the counter" loading="lazy"></div><div class="story-shade"></div></div>
     <div class="story-text">
       <div data-anim="fade" class="story-kicker">THE STORY — 01</div>
       <div data-anim="mask-rise" class="story-para">We opened our doors in February 2023 with a simple mission — to bring the highest-quality fish and the most generous portions to as many people as possible, at an exceptional value.</div>
@@ -246,7 +246,7 @@
       <div data-anim="fade" class="story-kicker">THE STORY — 02</div>
       <div data-anim="mask-rise" class="story-para">While most maki rolls are packed with rice and just a touch of fish, we’ve flipped that standard. Every roll is generously loaded with more fish than rice — the ideal bite, every time.</div>
     </div>
-    <div class="story-img" data-anim="wipe" data-dir="left"><img data-parallax src="assets/gallery/3.webp" alt="Handroll detail" loading="lazy"><div class="story-shade"></div></div>
+    <div class="story-img" data-anim="wipe" data-dir="left"><div class="story-plx" data-parallax><img src="assets/gallery/3.webp" alt="Handroll detail" loading="lazy"></div><div class="story-shade"></div></div>
   </div>
   <div class="story-quote">
     <div data-anim="words" class="quote-line">“We’ve flipped that standard.”</div>
@@ -254,7 +254,7 @@
     <div data-anim="fade" data-delay="350" class="quote-kicker">OUR MISSION — FEBRUARY 2023</div>
   </div>
   <div class="story-row">
-    <div class="story-img" data-anim="wipe" data-dir="right"><img data-parallax src="assets/gallery/5.webp" alt="House soy sauce" loading="lazy"><div class="story-shade"></div></div>
+    <div class="story-img" data-anim="wipe" data-dir="right"><div class="story-plx" data-parallax><img src="assets/gallery/5.webp" alt="House soy sauce" loading="lazy"></div><div class="story-shade"></div></div>
     <div class="story-text">
       <div data-anim="fade" class="story-kicker">THE STORY — 03</div>
       <div data-anim="mask-rise" class="story-para">We make our soy sauce in-house, adding a touch of sweetness to complement its umami depth. And everything is served temaki-style — skip the chopsticks and eat the traditional way, by hand.</div>
@@ -290,6 +290,7 @@
     </svg>
   </div>
   <div class="wagyu-mark" data-parallax data-pfactor="0.12">和牛</div>
+  <div class="wagyu-cols">
   <div class="wagyu-inner">
     <div data-anim="fade" class="wagyu-kicker">THE WAGYU DOSSIER</div>
     <h2 data-anim="words">Proof, on paper.</h2>
@@ -301,6 +302,11 @@
     </div>
     <div data-anim="mask-rise" data-delay="200" class="wagyu-para">Every cut is born, raised and graded in Japan, and arrives with its certificate. The originals hang by the counter — <span class="em">ask to see them; they’re always on display.</span></div>
     <div data-anim="stamp" data-delay="420" class="wagyu-seal"><span>A5</span></div>
+  </div>
+  <figure class="wagyu-photo" data-anim="wipe" data-dir="left" data-delay="150">
+    <img src="assets/wagyu.webp" alt="A5 Miyazaki wagyu handroll topped with Hokkaido uni and kaluga caviar" loading="lazy">
+    <figcaption>EXHIBIT — A5 WAGYU · UNI · CAVIAR</figcaption>
+  </figure>
   </div>
 </section>
 
@@ -470,12 +476,12 @@ c-360 -76 -603 -332 -693 -731 l-22 -95 1 -2885 c0 -2698 1 -2891 17 -2973 93
   <div class="gallery-strip-wrap">
     <div class="gallery-hairline"></div>
     <div class="gallery-strip">
-      <div class="g-item" data-anim="wipe" data-dir="right"><img src="assets/gallery/2.webp" alt="The counter" loading="lazy"><span>01</span></div>
-      <div class="g-item" data-anim="wipe" data-dir="right" data-delay="90"><img src="assets/gallery/6.webp" alt="Toasted to order" loading="lazy"><span>02</span></div>
-      <div class="g-item" data-anim="wipe" data-dir="right" data-delay="180"><img src="assets/gallery/5.webp" alt="House soy" loading="lazy"><span>03</span></div>
-      <div class="g-item" data-anim="wipe" data-dir="right" data-delay="270"><img src="assets/gallery/7.webp" alt="Hokkaido uni" loading="lazy"><span>04</span></div>
-      <div class="g-item" data-anim="wipe" data-dir="right" data-delay="360"><img src="assets/gallery/1.webp" alt="The first roll" loading="lazy"><span>05</span></div>
-      <div class="g-item" data-anim="wipe" data-dir="right" data-delay="450"><img src="assets/gallery/3.webp" alt="Crisp nori" loading="lazy"><span>06</span></div>
+      <div class="g-item" data-anim="wipe" data-dir="right"><div class="g-zoom"><img src="assets/gallery/2.webp" alt="The counter" loading="lazy"></div><span>01</span></div>
+      <div class="g-item" data-anim="wipe" data-dir="right" data-delay="90"><div class="g-zoom"><img src="assets/gallery/6.webp" alt="Toasted to order" loading="lazy"></div><span>02</span></div>
+      <div class="g-item" data-anim="wipe" data-dir="right" data-delay="180"><div class="g-zoom"><img src="assets/gallery/5.webp" alt="House soy" loading="lazy"></div><span>03</span></div>
+      <div class="g-item" data-anim="wipe" data-dir="right" data-delay="270"><div class="g-zoom"><img src="assets/gallery/7.webp" alt="Hokkaido uni" loading="lazy"></div><span>04</span></div>
+      <div class="g-item" data-anim="wipe" data-dir="right" data-delay="360"><div class="g-zoom"><img src="assets/gallery/1.webp" alt="The first roll" loading="lazy"></div><span>05</span></div>
+      <div class="g-item" data-anim="wipe" data-dir="right" data-delay="450"><div class="g-zoom"><img src="assets/gallery/3.webp" alt="Crisp nori" loading="lazy"></div><span>06</span></div>
     </div>
   </div>
 
