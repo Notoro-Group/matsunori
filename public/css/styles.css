@@ -49,10 +49,11 @@ h1, h2 { font-weight: 400; }
   html.mtn-cursor, html.mtn-cursor body, html.mtn-cursor a, html.mtn-cursor button, html.mtn-cursor summary { cursor: none; }
   html.mtn-cursor input, html.mtn-cursor textarea, html.mtn-cursor select { cursor: auto; }
 }
-.cursor-dot { position: fixed; left: 0; top: 0; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border-radius: 50%; background: var(--uni); pointer-events: none; z-index: 101; will-change: transform; transition: opacity .2s; }
-.cursor-dot::after { content: ''; position: absolute; inset: -8px; border-radius: 50%; border: 1px solid rgba(217, 164, 65, .6); transform: scale(.4); opacity: 0; transition: transform .28s cubic-bezier(.3, 1.1, .4, 1), opacity .18s; }
-.cursor-dot.hover::after { transform: scale(1); opacity: 1; }
-.cursor-dot.down::after { transform: scale(.62); opacity: 1; transition-duration: .12s; }
+.cursor-dot { position: fixed; left: 0; top: 0; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border-radius: 50%; background: var(--uni); pointer-events: none; z-index: 101; will-change: transform; transition: opacity .2s, box-shadow .3s var(--ease); }
+.cursor-dot::after { content: ''; position: absolute; inset: -8px; border-radius: 50%; border: 1px solid rgba(217, 164, 65, .55); transform: scale(1); opacity: 1; transition: transform .28s cubic-bezier(.3, 1.1, .4, 1), border-color .25s, box-shadow .3s var(--ease); }
+.cursor-dot.hover { box-shadow: 0 0 8px rgba(217, 164, 65, .85), 0 0 20px rgba(217, 164, 65, .45); }
+.cursor-dot.hover::after { transform: scale(1.14); border-color: rgba(217, 164, 65, .95); box-shadow: 0 0 14px rgba(217, 164, 65, .3); }
+.cursor-dot.down::after { transform: scale(.62); transition-duration: .12s; }
 #cursor-seam { position: fixed; inset: 0; pointer-events: none; z-index: 99; }
 .cursor-stamp { position: fixed; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; border: 1.5px solid var(--akami); pointer-events: none; z-index: 100; animation: mtnStampOut .55s cubic-bezier(.3, 1.1, .4, 1) forwards; }
 @keyframes mtnStampOut { 0% { transform: scale(.45) rotate(-6deg); opacity: .9; } 55% { transform: scale(1.05) rotate(0deg); opacity: .5; } 100% { transform: scale(1.18) rotate(0deg); opacity: 0; } }
