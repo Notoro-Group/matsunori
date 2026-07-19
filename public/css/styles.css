@@ -44,6 +44,11 @@ h1, h2 { font-weight: 400; }
 @keyframes mtnHeart { 0% { transform: translate(-50%, -50%) scale(.3); opacity: 0; } 16% { transform: translate(-50%, -50%) scale(1.14); opacity: 1; } 30% { transform: translate(-50%, -50%) scale(1); opacity: 1; } 100% { transform: translate(-50%, -165%) scale(1); opacity: 0; } }
 @keyframes mtnNudge { 0%, 100% { transform: translateX(0); opacity: .55; } 50% { transform: translateX(7px); opacity: 1; } }
 
+/* ---------- cursor: print registration mark ---------- */
+body { cursor: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%3E%3Cg%20stroke%3D%22%238A8578%22%20stroke-width%3D%221.2%22%3E%3Cline%20x1%3D%2216%22%20y1%3D%225%22%20x2%3D%2216%22%20y2%3D%2211.5%22%2F%3E%3Cline%20x1%3D%2216%22%20y1%3D%2220.5%22%20x2%3D%2216%22%20y2%3D%2227%22%2F%3E%3Cline%20x1%3D%225%22%20y1%3D%2216%22%20x2%3D%2211.5%22%20y2%3D%2216%22%2F%3E%3Cline%20x1%3D%2220.5%22%20y1%3D%2216%22%20x2%3D%2227%22%20y2%3D%2216%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%222.4%22%20fill%3D%22%23D9A441%22%2F%3E%3C%2Fsvg%3E') 16 16, auto; }
+a, button, summary, [role="button"], .loc-card, .g-item, .news-row, .news-hl, .menu-sheet, .pill, .faq-list summary { cursor: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%3E%3Cg%20stroke%3D%22%238A8578%22%20stroke-width%3D%221.2%22%20transform%3D%22rotate%2845%2016%2016%29%22%3E%3Cline%20x1%3D%2216%22%20y1%3D%225%22%20x2%3D%2216%22%20y2%3D%2210.5%22%2F%3E%3Cline%20x1%3D%2216%22%20y1%3D%2221.5%22%20x2%3D%2216%22%20y2%3D%2227%22%2F%3E%3Cline%20x1%3D%225%22%20y1%3D%2216%22%20x2%3D%2210.5%22%20y2%3D%2216%22%2F%3E%3Cline%20x1%3D%2221.5%22%20y1%3D%2216%22%20x2%3D%2227%22%20y2%3D%2216%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%223.8%22%20fill%3D%22%23D9A441%22%2F%3E%3C%2Fsvg%3E') 16 16, pointer; }
+input, textarea, select { cursor: auto; }
+
 /* ---------- intro loader ---------- */
 .loader { position: fixed; inset: 0; z-index: 100; pointer-events: none; }
 .loader-half { position: absolute; left: 0; right: 0; height: 50%; transition: transform .68s cubic-bezier(.7, 0, .16, 1); }
