@@ -22,7 +22,7 @@
   }
   // minutes-from-midnight spans per weekday (0 = Sunday), per matsunori.com
   function fenwaySched(day) {
-    return day === 0 ? [[960, 1320]]               // Sun 16:00–22:00 (dinner only)
+    return day === 0 ? [[690, 840], [960, 1320]]   // Sun 11:30–14:00, 16:00–22:00
       : day === 6 ? [[690, 840], [960, 1350]]      // Sat 11:30–14:00, 16:00–22:30
       : day === 5 ? [[1020, 1350]]                 // Fri 17:00–22:30
       : [[1020, 1320]];                            // Mon–Thu 17:00–22:00
