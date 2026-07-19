@@ -110,6 +110,8 @@ a.pill-row:hover { background: rgba(217, 164, 65, .07); }
 .locations { border-top: 1px solid var(--hair18); }
 .loc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1px; background: var(--hair30); border-top: 1px solid var(--hair25); margin-top: clamp(22px, 3vw, 34px); }
 .loc-card { position: relative; display: block; height: clamp(360px, 46vw, 480px); overflow: hidden; background: var(--ink); transition: filter .45s var(--ease); }
+.loc-stretch { position: absolute; inset: 0; z-index: 1; }
+.loc-card .loc-copy { z-index: 2; }
 .loc-card > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1); transition: transform .8s var(--ease); }
 .loc-grid.has-hover .loc-card:not(.hovered) { filter: brightness(.55) saturate(.75); }
 .loc-card.hovered > img, .loc-card.hovered .loc-placeholder { transform: scale(1.045); }

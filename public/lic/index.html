@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>matsunori — long island city</title>
+<meta name="description" content="Matsunori Handroll Bar, Long Island City — 27-09 Thomson Ave, Queens. Hours, menu, reservations on OpenTable, delivery, directions.">
+<meta name="theme-color" content="#0C0C0E">
+<link rel="icon" type="image/webp" href="/assets/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400;0,500;0,600&family=Fragment+Mono&family=Zen+Old+Mincho:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/vendor/leaflet.css">
+<link rel="stylesheet" href="/css/location.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Matsunori Handroll Bar — Long Island City",
+  "servesCuisine": ["Japanese", "Sushi", "Temaki"],
+  "url": "https://matsunori.com/lic",
+  "telephone": "+1-347-396-5091",
+  "email": "lic@matsunori.com",
+  "acceptsReservations": "https://www.opentable.com/restref/client/?rid=1488412",
+  "address": { "@type": "PostalAddress", "streetAddress": "27-09 Thomson Ave", "addressLocality": "Long Island City", "addressRegion": "NY", "postalCode": "11101", "addressCountry": "US" },
+  "geo": { "@type": "GeoCoordinates", "latitude": 40.74654, "longitude": -73.94274 },
+  "sameAs": ["https://www.instagram.com/matsunori.handrollbar/", "https://www.yelp.com/biz/matsunori-handroll-bar-queens-4"],
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "17:00", "closes": "22:30" }
+  ]
+}
+</script>
+<noscript><style>.loader{display:none}</style></noscript>
+</head>
+<body data-loc="lic">
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-half loader-top"></div>
+  <div class="loader-half loader-bot"></div>
+  <div class="loader-seam"></div>
+  <div class="loader-tag">手巻き — ONE ROLL AT A TIME</div>
+</div>
+
+<div id="progress" aria-hidden="true"></div>
+
+<header class="nav">
+  <a href="/" class="nav-brand">
+    <span class="nav-crest"><img src="/assets/logo.webp" alt="Matsunori logo"></span>
+    <span>matsunori</span>
+  </a>
+  <nav class="nav-links" aria-label="Site">
+    <a href="/#locations" class="nav-link">LOCATIONS</a>
+    <a href="/#story" class="nav-link sec">STORY</a>
+    <a href="/#wagyu" class="nav-link sec">WAGYU</a>
+    <a href="/#gallery" class="nav-link sec">GALLERY</a>
+    <span class="pill" id="pill" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">
+      <span class="pill-dot" id="pill-dot"></span>
+      <span class="pill-label" id="pill-label">OPEN NOW</span>
+      <span class="pill-panel">
+        <span class="pill-panel-inner">
+          <a class="pill-row" href="/fenway">
+            <span class="pill-city">FENWAY</span>
+            <span class="pill-note steam">WALK-INS ONLY</span>
+          </a>
+          <a class="pill-row" href="/lic">
+            <span class="pill-city">LIC</span>
+            <span class="pill-note gold">RESERVE — OPENTABLE ↗</span>
+          </a>
+          <span class="pill-row static">
+            <span class="pill-city steam">LYNNFIELD</span>
+            <span class="pill-soon"><span class="pill-soon-dot"></span>OPENING SOON</span>
+          </span>
+        </span>
+      </span>
+    </span>
+  </nav>
+</header>
+
+<main>
+<header class="loc-head">
+  <div data-anim="fade" class="loc-head-kicker">LONG ISLAND CITY — NEW YORK</div>
+  <h1 class="loc-title" data-anim="words">LIC</h1>
+  <div class="loc-statusline" data-anim="fade" data-delay="120">
+    <span class="dot" data-loc-dot></span>
+    <span class="label" data-loc-status>—</span>
+  </div>
+  <div class="loc-addr-line" data-anim="fade" data-delay="180">27-09 THOMSON AVE — LONG ISLAND CITY, NY 11101</div>
+  <div class="loc-actions" data-anim="fade" data-delay="260">
+    <a class="loc-btn gold" href="https://www.opentable.com/restref/client/?rid=1488412&restref=1488412&lang=en-US&ot_source=Restaurant%20website" target="_blank" rel="noopener">RESERVE — OPENTABLE ↗</a>
+    <a class="loc-btn" href="https://maps.app.goo.gl/eTR3m7itv4RwWF3A8" target="_blank" rel="noopener">DIRECTIONS ↗</a>
+    <a class="loc-btn" href="tel:+13473965091">CALL — (347) 396-5091</a>
+    <a class="loc-btn" href="mailto:lic@matsunori.com">EMAIL</a>
+  </div>
+</header>
+
+<div class="loc-band" data-anim="wipe" data-dir="right">
+  <img data-parallax src="/assets/gallery/1.webp" alt="The LIC counter">
+  <div class="loc-band-shade"></div>
+</div>
+
+<section class="loc-section" id="hours">
+  <div data-anim="fade" class="loc-section-kicker">HOURS</div>
+  <h2 data-anim="words">Dining &amp; delivery</h2>
+  <div class="loc-cols">
+    <div>
+      <div class="hours-block-kicker" data-anim="fade">WALK-IN DINING</div>
+      <div class="hours-table" data-anim="fade">
+        <div class="hours-row" data-day="0,1,2,3,4,5,6">
+          <span class="hours-day">Monday — Sunday<span class="hours-today-tag">— TODAY</span></span>
+          <span class="hours-times">5:00 — 10:30 PM</span>
+        </div>
+      </div>
+      <div class="hours-notes">KITCHEN CLOSES 30 MINUTES BEFORE CLOSE<br>WALK-INS &amp; RESERVATIONS WELCOME</div>
+    </div>
+    <div>
+      <div class="hours-block-kicker" data-anim="fade">ONLINE DELIVERY</div>
+      <div class="hours-table" data-anim="fade">
+        <div class="hours-row">
+          <span class="hours-day">Lunch</span>
+          <span class="hours-times">11:00 AM — 2:00 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Dinner</span>
+          <span class="hours-times">5:00 — 10:00 PM</span>
+        </div>
+      </div>
+      <div class="hours-notes">LUNCH IS SERVED EXCLUSIVELY VIA ONLINE DELIVERY</div>
+    </div>
+  </div>
+</section>
+
+<section class="loc-section" id="reserve">
+  <div data-anim="fade" class="loc-section-kicker">RESERVATIONS</div>
+  <h2 data-anim="words">Book the counter</h2>
+  <p class="loc-note-para" data-anim="fade">LIC takes reservations through OpenTable — and walk-ins are always welcome. Parties of six or more, call us.</p>
+  <div class="ot-wrap" data-anim="fade">
+    <script type="text/javascript" src="//www.opentable.com/widget/reservation/loader?rid=1488412&type=standard&theme=standard&iframe=true&domain=com&lang=en-US&newtab=true&ot_source=Restaurant%20website&primary_color=14171A&primary_font_color=F4EFE6&button_color=D9A441&button_font_color=0C0C0E&cfe=true"></script>
+  </div>
+  <div class="order-links" data-anim="fade">
+    <a class="loc-btn gold" href="https://www.opentable.com/restref/client/?rid=1488412&restref=1488412&lang=en-US&ot_source=Restaurant%20website" target="_blank" rel="noopener">OPEN IN OPENTABLE ↗</a>
+  </div>
+</section>
+
+<section class="loc-section" id="order">
+  <div data-anim="fade" class="loc-section-kicker">ORDER IN</div>
+  <h2 data-anim="words">Delivery &amp; pickup</h2>
+  <p class="loc-note-para" data-anim="fade">Lunch is served exclusively via online delivery. Phone orders are always welcome for pickup.</p>
+  <div class="order-links" data-anim="fade">
+    <a class="loc-btn" href="https://www.ubereats.com/store/matsunori-handroll-bar/g4KRb7bRUZeS8xfx-vJ_Ww" target="_blank" rel="noopener">UBER EATS ↗</a>
+    <a class="loc-btn" href="https://www.grubhub.com/restaurant/matsunori-27-09-thomson-avenue-long-island-city/11561616" target="_blank" rel="noopener">GRUBHUB ↗</a>
+    <a class="loc-btn" href="tel:+13473965091">PICKUP — CALL (347) 396-5091</a>
+  </div>
+</section>
+
+<section class="loc-section" id="find-us">
+  <div data-anim="fade" class="loc-section-kicker">FIND US</div>
+  <h2 data-anim="words">Court Square, Queens</h2>
+  <div class="loc-map-wrap" data-anim="fade">
+    <div id="loc-map" data-lat="40.74654" data-lng="-73.94274" aria-label="Map — Matsunori LIC, 27-09 Thomson Ave"></div>
+  </div>
+  <div class="map-meta">
+    <a href="https://maps.app.goo.gl/eTR3m7itv4RwWF3A8" target="_blank" rel="noopener">27-09 THOMSON AVE — LONG ISLAND CITY, NY 11101 ↗</a>
+    <span>40.7465° N — 73.9427° W · COURT SQ (E·M·G·7), 2 MIN</span>
+  </div>
+  <div class="loc-cols">
+    <div class="contact-rows" data-anim="fade">
+      <div class="contact-row"><span class="contact-key">PHONE</span><a class="contact-val" href="tel:+13473965091">+1 (347) 396-5091</a></div>
+      <div class="contact-row"><span class="contact-key">EMAIL</span><a class="contact-val" href="mailto:lic@matsunori.com">LIC@MATSUNORI.COM</a></div>
+      <div class="contact-row"><span class="contact-key">INSTAGRAM</span><a class="contact-val" href="https://www.instagram.com/matsunori.handrollbar/" target="_blank" rel="noopener">@MATSUNORI.HANDROLLBAR</a></div>
+      <div class="contact-row"><span class="contact-key">YELP</span><a class="contact-val" href="https://www.yelp.com/biz/matsunori-handroll-bar-queens-4" target="_blank" rel="noopener">MATSUNORI — LIC ↗</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="loc-section" id="menu">
+  <div data-anim="fade" class="loc-section-kicker">MENU — LONG ISLAND CITY</div>
+  <h2 data-anim="words">Served one at a time</h2>
+
+  <div class="menu-cat">
+    <div class="menu-cat-head" data-anim="fade">
+      <span class="menu-cat-name">Signatures</span>
+      <span class="menu-cat-note">SERVED ONE AT A TIME</span>
+    </div>
+    <div class="menu-items">
+      <div class="menu-item sig" data-anim="fade"><div class="menu-line"><span class="menu-name">Hokkaido Uni<span class="jp">雲丹</span></span><span class="menu-leader"></span><span class="menu-price">22</span></div><div class="menu-desc">Flown overnight from Hokkaido — never frozen.</div></div>
+      <div class="menu-item sig" data-anim="fade"><div class="menu-line"><span class="menu-name">A5 Miyazaki Wagyu<span class="jp">和牛</span></span><span class="menu-leader"></span><span class="menu-price">24</span></div><div class="menu-desc">Seared, truffle salt — from the certificate wall.</div></div>
+      <div class="menu-item sig" data-anim="fade"><div class="menu-line"><span class="menu-name">KKGB Wagyu<span class="jp">和牛</span></span><span class="menu-leader"></span><span class="menu-price">18</span></div><div class="menu-desc">Garlic butter, crispy garlic chips.</div></div>
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Miso Butter Cod</span><span class="menu-leader"></span><span class="menu-price">12</span></div><div class="menu-desc">Torched and caramelized — sweet-savory, almost like honey.</div></div>
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Eel &amp; Foie Gras</span><span class="menu-leader"></span><span class="menu-price">19</span></div><div class="menu-desc">Fire-roasted unagi, seared foie.</div></div>
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Mango Shrimp Tempura</span><span class="menu-leader"></span><span class="menu-price">15.5</span></div><div class="menu-desc">Shrimp tempura, mango, spicy mayo.</div></div>
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Garlic Koji Tori</span><span class="menu-leader"></span><span class="menu-price">19.5</span></div><div class="menu-desc">Koji-marinated chicken, garlic soy.</div></div>
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Snow Crab</span><span class="menu-leader"></span><span class="menu-price">16</span></div><div class="menu-desc">Hand-picked, house soy.</div></div>
+    </div>
+  </div>
+
+  <div class="menu-cat">
+    <div class="menu-cat-head" data-anim="fade">
+      <span class="menu-cat-name">Classics</span>
+      <span class="menu-cat-note">$7 — $14</span>
+    </div>
+    <div class="menu-items">
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Salmon</span><span class="menu-leader"></span><span class="menu-price">8.5</span></div><div class="menu-desc">Scottish salmon, scallion.</div></div>
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Yellowtail</span><span class="menu-leader"></span><span class="menu-price">9</span></div><div class="menu-desc">Yuzu kosho.</div></div>
+      <div class="menu-item sig" data-anim="fade"><div class="menu-line"><span class="menu-name">Chutoro<span class="jp">中トロ</span></span><span class="menu-leader"></span><span class="menu-price">14</span></div><div class="menu-desc">Medium-fatty bluefin.</div></div>
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Spicy Tuna</span><span class="menu-leader"></span><span class="menu-price">9.5</span></div><div class="menu-desc">Crispy sweet-potato crunch.</div></div>
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Spicy Scallop</span><span class="menu-leader"></span><span class="menu-price">11</span></div><div class="menu-desc">Spicy mayo, masago, tobiko.</div></div>
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Ikura Salmon</span><span class="menu-leader"></span><span class="menu-price">12</span></div><div class="menu-desc">Salmon, ikura, lime zest.</div></div>
+    </div>
+  </div>
+
+  <div class="menu-foot" data-anim="fade">● SIGNATURE SOURCING — UNI · WAGYU · TORO. DELIVERY MENU AND PRICING MAY DIFFER ON PLATFORM APPS.</div>
+</section>
+
+<section class="loc-section" id="faq">
+  <div data-anim="fade" class="loc-section-kicker">FAQ</div>
+  <h2 data-anim="words">Good questions</h2>
+  <div class="faq-list" data-anim="fade">
+    <details name="faq">
+      <summary>DO YOU TAKE RESERVATIONS?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">Yes — LIC takes reservations through OpenTable, and walk-ins are always welcome.</div>
+    </details>
+    <details name="faq">
+      <summary>DO YOU OFFER TAKEOUT OR DELIVERY?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">We are on Uber Eats, Postmates and Grubhub. We serve lunch exclusively via online delivery. Phone orders are always welcome for pickup as well.</div>
+    </details>
+    <details name="faq">
+      <summary>WHAT TYPE OF CUISINE DO YOU SPECIALIZE IN?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">We specialize in Temaki Sushi, otherwise known as handrolls. Another way you can think of us is Sushi Tacos!</div>
+    </details>
+    <details name="faq">
+      <summary>DO YOU HAVE VEGAN OR VEGETARIAN OPTIONS?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">We have vegetarian friendly options, but nothing fully vegan at this time.</div>
+    </details>
+    <details name="faq">
+      <summary>WHAT FORMS OF PAYMENT DO YOU TAKE?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">We accept all credit cards and cash. Including Apple/Google tap to pay.</div>
+    </details>
+    <details name="faq">
+      <summary>DO YOU OFFER CATERING SERVICES?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">Not at the moment, possibly in the future.</div>
+    </details>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="footer-kanji">マツノリ</div>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div>
+        <div class="footer-wordmark">matsunori</div>
+        <div class="footer-est">EST. FEBRUARY 2023 — BOSTON</div>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col"><span class="footer-h">LOCATIONS</span><a href="/fenway">FENWAY</a><a href="/lic">LIC</a><span class="footer-h">LYNNFIELD — SOON</span></div>
+      <div class="footer-col"><span class="footer-h">FOLLOW</span><a href="https://www.instagram.com/matsunori.handrollbar/" target="_blank" rel="noopener">INSTAGRAM</a><a href="https://www.yelp.com/biz/matsunori-handroll-bar-queens-4" target="_blank" rel="noopener">YELP</a><a href="https://maps.app.goo.gl/eTR3m7itv4RwWF3A8" target="_blank" rel="noopener">GOOGLE</a></div>
+      <div class="footer-col">
+        <span class="footer-h">FAMILY</span>
+        <a class="footer-parent" href="https://notoro.group" target="_blank" rel="noopener">NOTORO GROUP</a>
+        <a class="footer-child" href="/">MATSUNORI</a>
+        <a class="footer-child" href="https://mai.boston" target="_blank" rel="noopener">MAI IZAKAYA</a>
+        <a class="footer-child" href="https://norinori.boston" target="_blank" rel="noopener">NORINORI IZAKAYA</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bar"><span>© mmxxvi matsunori — handroll bar</span><span>one roll at a time</span></div>
+</footer>
+
+<div class="loc-bar" id="loc-bar">
+  <span class="loc-bar-status" data-bar-status>—</span>
+  <span class="loc-bar-links">
+    <a class="loc-btn gold" href="https://www.opentable.com/restref/client/?rid=1488412&restref=1488412&lang=en-US&ot_source=Restaurant%20website" target="_blank" rel="noopener">RESERVE</a>
+    <a class="loc-btn" href="tel:+13473965091">CALL</a>
+  </span>
+</div>
+
+<script src="/vendor/leaflet.js" defer></script>
+<script src="/js/main.js" defer></script>
+<script src="/js/location.js" defer></script>
+</body>
+</html>

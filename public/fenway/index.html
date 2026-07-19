@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>matsunori — fenway, boston</title>
+<meta name="description" content="Matsunori Handroll Bar, Fenway — 900 Beacon St, Unit A, Boston. Hours, menu, directions. Walk-ins only.">
+<meta name="theme-color" content="#0C0C0E">
+<link rel="icon" type="image/webp" href="/assets/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400;0,500;0,600&family=Fragment+Mono&family=Zen+Old+Mincho:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/vendor/leaflet.css">
+<link rel="stylesheet" href="/css/location.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Matsunori Handroll Bar — Fenway",
+  "servesCuisine": ["Japanese", "Sushi", "Temaki"],
+  "url": "https://matsunori.com/fenway",
+  "telephone": "+1-857-305-3993",
+  "email": "boston@matsunori.com",
+  "acceptsReservations": "False",
+  "address": { "@type": "PostalAddress", "streetAddress": "900 Beacon St, Unit A", "addressLocality": "Boston", "addressRegion": "MA", "postalCode": "02215", "addressCountry": "US" },
+  "geo": { "@type": "GeoCoordinates", "latitude": 42.34683, "longitude": -71.10576 },
+  "sameAs": ["https://www.instagram.com/matsunori.handrollbar/", "https://www.yelp.com/biz/matsunori-handroll-bar-boston-3"],
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "17:00", "closes": "22:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "17:00", "closes": "22:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "11:30", "closes": "14:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "16:00", "closes": "22:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "16:00", "closes": "22:00" }
+  ]
+}
+</script>
+<noscript><style>.loader{display:none}</style></noscript>
+</head>
+<body data-loc="fenway">
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-half loader-top"></div>
+  <div class="loader-half loader-bot"></div>
+  <div class="loader-seam"></div>
+  <div class="loader-tag">手巻き — ONE ROLL AT A TIME</div>
+</div>
+
+<div id="progress" aria-hidden="true"></div>
+
+<header class="nav">
+  <a href="/" class="nav-brand">
+    <span class="nav-crest"><img src="/assets/logo.webp" alt="Matsunori logo"></span>
+    <span>matsunori</span>
+  </a>
+  <nav class="nav-links" aria-label="Site">
+    <a href="/#locations" class="nav-link">LOCATIONS</a>
+    <a href="/#story" class="nav-link sec">STORY</a>
+    <a href="/#wagyu" class="nav-link sec">WAGYU</a>
+    <a href="/#gallery" class="nav-link sec">GALLERY</a>
+    <span class="pill" id="pill" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">
+      <span class="pill-dot" id="pill-dot"></span>
+      <span class="pill-label" id="pill-label">OPEN NOW</span>
+      <span class="pill-panel">
+        <span class="pill-panel-inner">
+          <a class="pill-row" href="/fenway">
+            <span class="pill-city">FENWAY</span>
+            <span class="pill-note steam">WALK-INS ONLY</span>
+          </a>
+          <a class="pill-row" href="/lic">
+            <span class="pill-city">LIC</span>
+            <span class="pill-note gold">RESERVE — OPENTABLE ↗</span>
+          </a>
+          <span class="pill-row static">
+            <span class="pill-city steam">LYNNFIELD</span>
+            <span class="pill-soon"><span class="pill-soon-dot"></span>OPENING SOON</span>
+          </span>
+        </span>
+      </span>
+    </span>
+  </nav>
+</header>
+
+<main>
+<header class="loc-head">
+  <div data-anim="fade" class="loc-head-kicker">AUDUBON CIRCLE — BOSTON</div>
+  <h1 class="loc-title" data-anim="words">Fenway</h1>
+  <div class="loc-statusline" data-anim="fade" data-delay="120">
+    <span class="dot" data-loc-dot></span>
+    <span class="label" data-loc-status>—</span>
+  </div>
+  <div class="loc-addr-line" data-anim="fade" data-delay="180">900 BEACON ST, UNIT A — BOSTON, MA 02215</div>
+  <div class="loc-actions" data-anim="fade" data-delay="260">
+    <a class="loc-btn gold" href="https://maps.app.goo.gl/1uYDaBxGDzXBHC2P6" target="_blank" rel="noopener">DIRECTIONS ↗</a>
+    <a class="loc-btn" href="tel:+18573053993">CALL — (857) 305-3993</a>
+    <a class="loc-btn" href="mailto:boston@matsunori.com">EMAIL</a>
+  </div>
+</header>
+
+<div class="loc-band" data-anim="wipe" data-dir="right">
+  <img data-parallax src="/assets/gallery/9.webp" alt="The Fenway counter">
+  <div class="loc-band-shade"></div>
+</div>
+
+<section class="loc-section" id="hours">
+  <div data-anim="fade" class="loc-section-kicker">HOURS</div>
+  <h2 data-anim="words">Walk-in dining</h2>
+  <div class="loc-cols">
+    <div>
+      <div class="hours-table" data-anim="fade">
+        <div class="hours-row" data-day="1,2,3,4">
+          <span class="hours-day">Monday — Thursday<span class="hours-today-tag">— TODAY</span></span>
+          <span class="hours-times">5:00 — 10:00 PM</span>
+        </div>
+        <div class="hours-row" data-day="5">
+          <span class="hours-day">Friday<span class="hours-today-tag">— TODAY</span></span>
+          <span class="hours-times">5:00 — 10:30 PM</span>
+        </div>
+        <div class="hours-row" data-day="6">
+          <span class="hours-day">Saturday<span class="hours-today-tag">— TODAY</span></span>
+          <span class="hours-times">11:30 AM — 2:00 PM<br>4:00 — 10:30 PM</span>
+        </div>
+        <div class="hours-row" data-day="0">
+          <span class="hours-day">Sunday<span class="hours-today-tag">— TODAY</span></span>
+          <span class="hours-times">4:00 — 10:00 PM</span>
+        </div>
+      </div>
+      <div class="hours-notes">KITCHEN CLOSES 30 MINUTES BEFORE CLOSE<br>WALK-INS ONLY — NO RESERVATIONS<br>NO TAKEOUT OR DELIVERY AT THIS LOCATION</div>
+    </div>
+  </div>
+</section>
+
+<section class="loc-section" id="find-us">
+  <div data-anim="fade" class="loc-section-kicker">FIND US</div>
+  <h2 data-anim="words">Audubon Circle, by the ballpark</h2>
+  <div class="loc-map-wrap" data-anim="fade">
+    <div id="loc-map" data-lat="42.34683" data-lng="-71.10576" aria-label="Map — Matsunori Fenway, 900 Beacon St"></div>
+  </div>
+  <div class="map-meta">
+    <a href="https://maps.app.goo.gl/1uYDaBxGDzXBHC2P6" target="_blank" rel="noopener">900 BEACON ST, UNIT A — BOSTON, MA 02215 ↗</a>
+    <span>42.3468° N — 71.1058° W · ST. MARY'S ST (C LINE), 2 MIN</span>
+  </div>
+  <div class="loc-cols">
+    <div class="contact-rows" data-anim="fade">
+      <div class="contact-row"><span class="contact-key">PHONE</span><a class="contact-val" href="tel:+18573053993">+1 (857) 305-3993</a></div>
+      <div class="contact-row"><span class="contact-key">EMAIL</span><a class="contact-val" href="mailto:boston@matsunori.com">BOSTON@MATSUNORI.COM</a></div>
+      <div class="contact-row"><span class="contact-key">INSTAGRAM</span><a class="contact-val" href="https://www.instagram.com/matsunori.handrollbar/" target="_blank" rel="noopener">@MATSUNORI.HANDROLLBAR</a></div>
+      <div class="contact-row"><span class="contact-key">YELP</span><a class="contact-val" href="https://www.yelp.com/biz/matsunori-handroll-bar-boston-3" target="_blank" rel="noopener">MATSUNORI — BOSTON ↗</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="loc-section" id="menu">
+  <div data-anim="fade" class="loc-section-kicker">MENU — FENWAY</div>
+  <h2 data-anim="words">Served one at a time</h2>
+
+  <div class="menu-cat">
+    <div class="menu-cat-head" data-anim="fade">
+      <span class="menu-cat-name">Signatures</span>
+      <span class="menu-cat-note">SERVED ONE AT A TIME</span>
+    </div>
+    <div class="menu-items">
+      <div class="menu-item sig" data-anim="fade"><div class="menu-line"><span class="menu-name">Hokkaido Uni<span class="jp">雲丹</span></span><span class="menu-leader"></span><span class="menu-price">22</span></div><div class="menu-desc">Flown overnight from Hokkaido — never frozen.</div></div>
+      <div class="menu-item sig" data-anim="fade"><div class="menu-line"><span class="menu-name">A5 Miyazaki Wagyu<span class="jp">和牛</span></span><span class="menu-leader"></span><span class="menu-price">24</span></div><div class="menu-desc">Seared, truffle salt — from the certificate wall.</div></div>
+      <div class="menu-item sig" data-anim="fade"><div class="menu-line"><span class="menu-name">KKGB Wagyu<span class="jp">和牛</span></span><span class="menu-leader"></span><span class="menu-price">18</span></div><div class="menu-desc">Garlic butter, crispy garlic chips.</div></div>
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Miso Butter Cod</span><span class="menu-leader"></span><span class="menu-price">12</span></div><div class="menu-desc">Torched and caramelized — sweet-savory, almost like honey.</div></div>
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Eel &amp; Foie Gras</span><span class="menu-leader"></span><span class="menu-price">19</span></div><div class="menu-desc">Fire-roasted unagi, seared foie.</div></div>
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Mango Shrimp Tempura</span><span class="menu-leader"></span><span class="menu-price">15.5</span></div><div class="menu-desc">Shrimp tempura, mango, spicy mayo.</div></div>
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Garlic Koji Tori</span><span class="menu-leader"></span><span class="menu-price">19.5</span></div><div class="menu-desc">Koji-marinated chicken, garlic soy.</div></div>
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Snow Crab</span><span class="menu-leader"></span><span class="menu-price">16</span></div><div class="menu-desc">Hand-picked, house soy.</div></div>
+    </div>
+  </div>
+
+  <div class="menu-cat">
+    <div class="menu-cat-head" data-anim="fade">
+      <span class="menu-cat-name">Classics</span>
+      <span class="menu-cat-note">$7 — $14</span>
+    </div>
+    <div class="menu-items">
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Salmon</span><span class="menu-leader"></span><span class="menu-price">8.5</span></div><div class="menu-desc">Scottish salmon, scallion.</div></div>
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Yellowtail</span><span class="menu-leader"></span><span class="menu-price">9</span></div><div class="menu-desc">Yuzu kosho.</div></div>
+      <div class="menu-item sig" data-anim="fade"><div class="menu-line"><span class="menu-name">Chutoro<span class="jp">中トロ</span></span><span class="menu-leader"></span><span class="menu-price">14</span></div><div class="menu-desc">Medium-fatty bluefin.</div></div>
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Spicy Tuna</span><span class="menu-leader"></span><span class="menu-price">9.5</span></div><div class="menu-desc">Crispy sweet-potato crunch.</div></div>
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Spicy Scallop</span><span class="menu-leader"></span><span class="menu-price">11</span></div><div class="menu-desc">Spicy mayo, masago, tobiko.</div></div>
+      <div class="menu-item" data-anim="fade"><div class="menu-line"><span class="menu-name">Ikura Salmon</span><span class="menu-leader"></span><span class="menu-price">12</span></div><div class="menu-desc">Salmon, ikura, lime zest.</div></div>
+    </div>
+  </div>
+
+  <div class="menu-foot" data-anim="fade">● SIGNATURE SOURCING — UNI · WAGYU · TORO. MENU ROTATES WITH THE SEASON.</div>
+</section>
+
+<section class="loc-section" id="faq">
+  <div data-anim="fade" class="loc-section-kicker">FAQ</div>
+  <h2 data-anim="words">Good questions</h2>
+  <div class="faq-list" data-anim="fade">
+    <details name="faq">
+      <summary>DO YOU OFFER TAKEOUT OR DELIVERY?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">We do not currently offer takeout at Fenway — every roll is handed over the counter, seconds after it's rolled.</div>
+    </details>
+    <details name="faq">
+      <summary>DO YOU TAKE RESERVATIONS?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">We do not take reservations at this time. Only walk-ins.</div>
+    </details>
+    <details name="faq">
+      <summary>WHAT TYPE OF CUISINE DO YOU SPECIALIZE IN?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">We specialize in Temaki Sushi, otherwise known as handrolls. Another way you can think of us is Sushi Tacos!</div>
+    </details>
+    <details name="faq">
+      <summary>DO YOU HAVE VEGAN OR VEGETARIAN OPTIONS?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">We have vegetarian friendly options, but nothing fully vegan at this time.</div>
+    </details>
+    <details name="faq">
+      <summary>WHAT FORMS OF PAYMENT DO YOU TAKE?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">We accept all credit cards and cash. Including Apple/Google tap to pay.</div>
+    </details>
+    <details name="faq">
+      <summary>DO YOU OFFER CATERING SERVICES?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">Not at the moment, possibly in the future.</div>
+    </details>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="footer-kanji">マツノリ</div>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div>
+        <div class="footer-wordmark">matsunori</div>
+        <div class="footer-est">EST. FEBRUARY 2023 — BOSTON</div>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col"><span class="footer-h">LOCATIONS</span><a href="/fenway">FENWAY</a><a href="/lic">LIC</a><span class="footer-h">LYNNFIELD — SOON</span></div>
+      <div class="footer-col"><span class="footer-h">FOLLOW</span><a href="https://www.instagram.com/matsunori.handrollbar/" target="_blank" rel="noopener">INSTAGRAM</a><a href="https://www.yelp.com/biz/matsunori-handroll-bar-boston-3" target="_blank" rel="noopener">YELP</a><a href="https://maps.app.goo.gl/1uYDaBxGDzXBHC2P6" target="_blank" rel="noopener">GOOGLE</a></div>
+      <div class="footer-col">
+        <span class="footer-h">FAMILY</span>
+        <a class="footer-parent" href="https://notoro.group" target="_blank" rel="noopener">NOTORO GROUP</a>
+        <a class="footer-child" href="/">MATSUNORI</a>
+        <a class="footer-child" href="https://mai.boston" target="_blank" rel="noopener">MAI IZAKAYA</a>
+        <a class="footer-child" href="https://norinori.boston" target="_blank" rel="noopener">NORINORI IZAKAYA</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bar"><span>© mmxxvi matsunori — handroll bar</span><span>one roll at a time</span></div>
+</footer>
+
+<div class="loc-bar" id="loc-bar">
+  <span class="loc-bar-status" data-bar-status>—</span>
+  <span class="loc-bar-links">
+    <a class="loc-btn gold" href="https://maps.app.goo.gl/1uYDaBxGDzXBHC2P6" target="_blank" rel="noopener">DIRECTIONS</a>
+    <a class="loc-btn" href="tel:+18573053993">CALL</a>
+  </span>
+</div>
+
+<script src="/vendor/leaflet.js" defer></script>
+<script src="/js/main.js" defer></script>
+<script src="/js/location.js" defer></script>
+</body>
+</html>

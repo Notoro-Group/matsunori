@@ -1,0 +1,105 @@
+/* matsunori — location pages (/fenway, /lic)
+   Shares tokens and furniture with styles.css; loaded after it. */
+
+/* ---------- header ---------- */
+.loc-head { padding: calc(64px + clamp(44px, 7vw, 76px)) var(--pad-x) clamp(30px, 4.4vw, 48px); }
+.loc-head-kicker { font: 500 10px var(--sans); letter-spacing: .32em; color: var(--steam); }
+.loc-title { margin: 14px 0 0; font: 400 clamp(54px, 10vw, 112px)/0.95 var(--serif); font-weight: 400; color: var(--rice); }
+.loc-statusline { display: inline-flex; align-items: center; gap: 10px; margin-top: 20px; }
+.loc-statusline .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--steam); display: inline-block; }
+.loc-statusline .label { font: 400 11px var(--mono); letter-spacing: .08em; color: var(--steam); }
+.loc-addr-line { margin-top: 12px; font: 400 10px var(--mono); letter-spacing: .18em; color: var(--cream2); }
+.loc-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.loc-btn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(138, 133, 120, .4); padding: 10px 16px; border-radius: 2px; font: 500 9.5px var(--mono); letter-spacing: .2em; color: var(--cream2); transition: border-color .25s, color .25s; }
+.loc-btn:hover, .loc-btn:focus-visible { border-color: rgba(217, 164, 65, .7); color: var(--uni); }
+.loc-btn.gold { border-color: rgba(217, 164, 65, .55); color: var(--uni); }
+.loc-btn.gold:hover, .loc-btn.gold:focus-visible { background: rgba(217, 164, 65, .1); }
+
+/* ---------- photo band ---------- */
+.loc-band { position: relative; height: clamp(220px, 36vw, 380px); overflow: hidden; border-top: 1px solid var(--hair18); border-bottom: 1px solid var(--hair18); }
+.loc-band img { position: absolute; inset: -8% 0; width: 100%; height: 116%; object-fit: cover; }
+.loc-band-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12, 12, 14, .5), rgba(12, 12, 14, .25) 45%, rgba(12, 12, 14, .55)); }
+
+/* ---------- sections ---------- */
+.loc-section { border-top: 1px solid var(--hair18); padding: clamp(44px, 6vw, 72px) var(--pad-x); }
+.loc-section:first-of-type { border-top: 0; }
+.loc-section-kicker { font: 400 9.5px var(--mono); letter-spacing: .3em; color: var(--steam); }
+.loc-section h2 { margin: 14px 0 0; font: 400 clamp(28px, 3.4vw, 42px) var(--serif); font-weight: 400; color: var(--rice); }
+.loc-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: clamp(28px, 4vw, 56px); margin-top: clamp(24px, 3vw, 36px); }
+
+/* ---------- hours ---------- */
+.hours-block-kicker { font: 400 9px var(--mono); letter-spacing: .26em; color: var(--steam); margin-bottom: 8px; }
+.hours-table { max-width: 640px; border-top: 1px solid var(--hair25); }
+.hours-row { display: flex; justify-content: space-between; align-items: baseline; gap: 18px; padding: 13px 0 13px 2px; border-bottom: 1px solid var(--hair25); }
+.hours-day { font: 400 clamp(17px, 1.9vw, 20px) var(--serif); color: var(--cream); }
+.hours-today-tag { display: none; font: 400 8.5px var(--mono); letter-spacing: .22em; color: var(--uni); margin-left: 10px; vertical-align: 2px; }
+.hours-times { text-align: right; font: 400 11.5px/1.8 var(--mono); color: var(--cream2); font-variant-numeric: tabular-nums; }
+.hours-row.today { border-left: 2px solid var(--uni); padding-left: 12px; }
+.hours-row.today .hours-day { color: var(--rice); }
+.hours-row.today .hours-today-tag { display: inline; }
+.hours-notes { margin-top: 16px; font: 400 9px/2 var(--mono); letter-spacing: .18em; color: var(--steam); }
+
+/* ---------- reserve / order ---------- */
+.loc-note-para { margin-top: 18px; font: 400 13.5px/1.75 var(--sans); color: var(--cream2); max-width: 520px; text-wrap: pretty; }
+.ot-wrap { margin-top: 22px; max-width: 260px; }
+.ot-wrap iframe { border: 0 !important; }
+.order-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+/* ---------- find us / map ---------- */
+.loc-map-wrap { position: relative; height: clamp(300px, 38vw, 440px); border: 1px solid var(--hair25); margin-top: clamp(24px, 3vw, 36px); background: #0E1013; }
+#loc-map { position: absolute; inset: 0; z-index: 1; }
+.leaflet-container { background: #0E1013; font-family: var(--mono); }
+.leaflet-container a { color: var(--steam); }
+.leaflet-control-attribution { background: rgba(12, 12, 14, .7) !important; color: rgba(138, 133, 120, .8); font: 400 8px var(--mono); }
+.leaflet-bar { border: 1px solid var(--hair35) !important; box-shadow: none !important; }
+.leaflet-bar a { background: var(--nori) !important; color: var(--cream2) !important; border-bottom: 1px solid var(--hair25) !important; }
+.leaflet-bar a:hover { color: var(--uni) !important; }
+.map-pin { position: relative; }
+.map-pin-dot { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 10px; height: 10px; border-radius: 50%; background: var(--uni); }
+.map-pin-ring { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(217, 164, 65, .55); animation: mtnPulse 2.4s ease-in-out infinite; }
+.map-meta { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 14px; font: 400 9.5px var(--mono); letter-spacing: .14em; color: var(--steam); }
+.map-meta a { color: var(--cream2); }
+.map-meta a:hover { color: var(--uni); }
+
+/* ---------- contact ---------- */
+.contact-rows { max-width: 640px; border-top: 1px solid var(--hair25); }
+.contact-row { display: flex; justify-content: space-between; align-items: baseline; gap: 18px; padding: 13px 2px; border-bottom: 1px solid var(--hair25); }
+.contact-key { font: 400 9.5px var(--mono); letter-spacing: .18em; color: var(--steam); }
+.contact-val { font: 400 11.5px var(--mono); color: var(--rice); text-align: right; }
+.contact-val:hover { color: var(--uni); }
+
+/* ---------- menu ---------- */
+.menu-cat { margin-top: clamp(30px, 4vw, 44px); }
+.menu-cat-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; border-bottom: 1px solid var(--hair30); padding-bottom: 10px; }
+.menu-cat-name { font: 400 clamp(21px, 2.4vw, 26px) var(--serif); color: var(--rice); }
+.menu-cat-note { font: 400 9px var(--mono); letter-spacing: .24em; color: var(--steam); }
+.menu-items { max-width: 760px; }
+.menu-item { padding: 14px 0; border-bottom: 1px solid rgba(138, 133, 120, .16); }
+.menu-line { display: flex; align-items: baseline; gap: 12px; }
+.menu-name { font: 400 clamp(17px, 1.9vw, 20px) var(--serif); color: var(--rice); white-space: nowrap; }
+.menu-name .jp { font: 400 .72em var(--jpfont); color: var(--steam); margin-left: 8px; letter-spacing: .1em; }
+.menu-item.sig .menu-name::before { content: ''; display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--uni); margin-right: 10px; vertical-align: 3px; }
+.menu-leader { flex: 1; border-bottom: 1px dotted rgba(138, 133, 120, .35); transform: translateY(-4px); min-width: 24px; }
+.menu-price { font: 400 12px var(--mono); color: var(--rice); font-variant-numeric: tabular-nums; }
+.menu-desc { margin-top: 5px; font: 400 12.5px/1.6 var(--sans); color: var(--cream2); max-width: 560px; }
+.menu-foot { margin-top: 22px; font: 400 9px var(--mono); letter-spacing: .2em; color: var(--steam); }
+
+/* ---------- faq ---------- */
+.faq-list { max-width: 760px; margin-top: clamp(20px, 3vw, 30px); border-top: 1px solid var(--hair25); }
+.faq-list details { border-bottom: 1px solid var(--hair25); }
+.faq-list summary { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding: 17px 2px; cursor: pointer; list-style: none; font: 500 10.5px var(--sans); letter-spacing: .18em; color: var(--rice); transition: color .25s; }
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary:hover { color: var(--uni); }
+.faq-plus { font: 400 16px var(--mono); color: var(--uni); transition: transform .3s var(--ease); flex: none; }
+.faq-list details[open] .faq-plus { transform: rotate(45deg); }
+.faq-a { padding: 0 2px 20px; font: 400 13.5px/1.75 var(--sans); color: var(--cream2); max-width: 620px; text-wrap: pretty; }
+
+/* ---------- sticky quick bar (mobile) ---------- */
+.loc-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 45; display: none; align-items: center; justify-content: space-between; gap: 12px; padding: 11px var(--pad-x); background: rgba(12, 12, 14, .93); border-top: 1px solid var(--hair25); transform: translateY(102%); transition: transform .35s var(--ease); }
+.loc-bar.show { transform: none; }
+.loc-bar-status { font: 400 9.5px var(--mono); letter-spacing: .1em; color: var(--uni); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.loc-bar-links { display: flex; gap: 8px; flex: none; }
+.loc-bar-links .loc-btn { padding: 8px 12px; }
+@media (max-width: 779.98px) {
+  .loc-bar { display: flex; }
+}
