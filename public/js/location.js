@@ -22,7 +22,9 @@
         : day === 5 ? [[1020, 1350]]            // Fri 5:00–10:30 PM
         : [[1020, 1320]];                       // Mon–Thu 5:00–10:00 PM
     },
-    lic: function () { return [[1020, 1350]]; } // daily 5:00–10:30 PM
+    lic: function (day) {                       // daily 5:00–10:30 PM; Sat/Sun lunch 11:30 AM–3:00 PM
+      return (day === 0 || day === 6) ? [[690, 900], [1020, 1350]] : [[1020, 1350]];
+    }
   };
 
   function status() {

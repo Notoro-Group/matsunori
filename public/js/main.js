@@ -27,7 +27,9 @@
       : day === 5 ? [[1020, 1350]]                 // Fri 17:00–22:30
       : [[1020, 1320]];                            // Mon–Thu 17:00–22:00
   }
-  function licSched() { return [[1020, 1350]]; }   // daily 17:00–22:30
+  function licSched(day) {                          // daily 17:00–22:30; Sat/Sun lunch 11:30–15:00
+    return (day === 0 || day === 6) ? [[690, 900], [1020, 1350]] : [[1020, 1350]];
+  }
   function getStatus(sched) {
     var d = nycNow(), day = d.getDay(), m = d.getHours() * 60 + d.getMinutes();
     var spans = sched(day), i;
