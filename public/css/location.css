@@ -87,6 +87,18 @@
 .menu-desc { margin-top: 5px; font: 400 12.5px/1.6 var(--sans); color: var(--cream2); max-width: 560px; }
 .menu-foot { margin-top: 22px; font: 400 9px var(--mono); letter-spacing: .2em; color: var(--steam); }
 
+/* ---------- reviews ---------- */
+.review-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: clamp(14px, 2vw, 22px); max-width: 640px; margin-top: clamp(24px, 3vw, 36px); }
+.review-metric { display: flex; flex-direction: column; gap: 10px; background: var(--nori); border: 1px solid var(--hair25); padding: clamp(20px, 3vw, 26px); transition: border-color .3s; }
+.review-metric:hover, .review-metric:focus-visible { border-color: rgba(217, 164, 65, .45); }
+.review-src { font: 500 9.5px var(--sans); letter-spacing: .3em; color: var(--steam); }
+.review-num { font: 400 clamp(38px, 4.4vw, 52px)/1 var(--serif); color: var(--rice); }
+.review-count { margin-top: 4px; font: 500 9px var(--mono); letter-spacing: .2em; color: var(--uni); }
+.review-asof { margin-top: 14px; font: 400 8.5px var(--mono); letter-spacing: .2em; color: var(--steam); }
+.review-quote { margin: clamp(30px, 4vw, 44px) 0 0; max-width: 720px; }
+.review-quote blockquote { margin: 0; font: italic 400 clamp(20px, 2.6vw, 30px)/1.4 var(--serif); color: var(--rice); text-wrap: pretty; }
+.review-quote figcaption { margin-top: 14px; font: 400 9.5px var(--mono); letter-spacing: .26em; color: var(--steam); }
+
 /* ---------- faq ---------- */
 .faq-list { max-width: 760px; margin-top: clamp(20px, 3vw, 30px); border-top: 1px solid var(--hair25); }
 .faq-list details { border-bottom: 1px solid var(--hair25); }

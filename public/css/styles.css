@@ -121,6 +121,10 @@ a.pill-row:hover { background: rgba(217, 164, 65, .07); }
 .loc-copy { position: absolute; left: clamp(20px, 3vw, 40px); bottom: clamp(22px, 3vw, 34px); right: clamp(20px, 3vw, 40px); }
 .loc-kicker { font: 500 9.5px var(--sans); letter-spacing: .32em; color: var(--steam); }
 .loc-name { font: 400 clamp(38px, 4.6vw, 56px)/1 var(--serif); color: var(--rice); margin-top: 10px; }
+.stars { position: relative; display: inline-block; font-size: 12px; letter-spacing: 2px; line-height: 1; color: rgba(138, 133, 120, .5); }
+.stars-fill { position: absolute; left: 0; top: 0; overflow: hidden; white-space: nowrap; color: var(--uni); }
+.loc-rating { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
+.loc-rating-label { font: 400 9.5px var(--mono); letter-spacing: .14em; color: var(--cream2); }
 .loc-row { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-top: 16px; border-top: 1px solid var(--hair35); padding-top: 13px; }
 .loc-status { display: inline-flex; align-items: center; gap: 8px; }
 .loc-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--steam); display: inline-block; }
