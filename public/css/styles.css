@@ -166,7 +166,7 @@ a.pill-row:hover { background: rgba(217, 164, 65, .07); }
 .anatomy-kicker { font: 400 10px var(--mono); letter-spacing: .26em; color: var(--anat-label); }
 .anatomy-count { font: 400 11px var(--mono); color: var(--akami); }
 .anatomy-kanji { position: absolute; top: 50%; right: clamp(16px, 3vw, 44px); transform: translateY(-50%); writing-mode: vertical-rl; font: 400 clamp(13px, 1.5vw, 18px) var(--jpfont); letter-spacing: .44em; color: rgba(179, 58, 50, .4); z-index: 4; }
-.anatomy-stage { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(520px, 74vw); aspect-ratio: 1 / 1; border: 1px solid rgba(138, 111, 102, .4); }
+.anatomy-stage { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(520px, 74vw, max(260px, calc(100vh - 360px))); aspect-ratio: 1 / 1; border: 1px solid rgba(138, 111, 102, .4); background: var(--anat-bg); z-index: 2; }
 .anatomy-stage::before, .anatomy-stage::after { content: ''; position: absolute; width: 14px; height: 14px; }
 .anatomy-stage::before { top: -1px; left: -1px; border-top: 1px solid rgba(179, 58, 50, .65); border-left: 1px solid rgba(179, 58, 50, .65); }
 .anatomy-stage::after { bottom: -1px; right: -1px; border-bottom: 1px solid rgba(179, 58, 50, .65); border-right: 1px solid rgba(179, 58, 50, .65); }
