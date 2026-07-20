@@ -373,5 +373,4 @@ a.pill-row:hover { background: rgba(217, 164, 65, .07); }
   .hero-cue, .pill.is-open .pill-dot, .loc-dot.pulse, .deck-hint .cue, .deck-hint .nudge { animation: none; }
   .fold, .anat-cap > div, .anat-rule, .anat-step-label { transition: none; }
   .deck-heart.on { display: none; }
-  .hlw { background-size: 100% 100%; color: var(--ink); }
 }
