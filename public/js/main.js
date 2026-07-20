@@ -170,23 +170,14 @@
         inner.style.transition = 'transform .85s ' + EASE;
         el._inner = inner;
       } else if (kind === 'words') {
-        // split into masked words; words inside a <mark class="hl"> keep a
-        // .hlw tag so the highlight can sweep them after the rise
-        var wordList = [];
-        Array.prototype.forEach.call(el.childNodes, function (node) {
-          var hl = node.nodeType === 1 && node.classList && node.classList.contains('hl');
-          (node.textContent || '').split(/\s+/).filter(Boolean).forEach(function (w) {
-            wordList.push({ w: w, hl: hl });
-          });
-        });
+        var text = el.textContent;
         el.textContent = '';
-        wordList.forEach(function (item, i) {
+        text.split(/\s+/).filter(Boolean).forEach(function (w, i) {
           var mask = document.createElement('span');
           mask.style.cssText = 'display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.1em;margin-bottom:-.1em';
           var inner = document.createElement('span');
           inner.style.cssText = 'display:inline-block;transform:translateY(110%);transition:transform .6s ' + EASE + ' ' + (i * 60) + 'ms';
-          if (item.hl) { inner.classList.add('hlw'); inner.classList.add('on'); } // statically highlighted
-          inner.textContent = item.w;
+          inner.textContent = w;
           mask.appendChild(inner);
           el.appendChild(mask);
           el.appendChild(document.createTextNode(' '));

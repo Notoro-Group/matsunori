@@ -32,9 +32,6 @@ body { margin: 0; background: var(--ink); color: var(--rice); font-family: var(-
 a { color: var(--cream2); text-decoration: none; }
 a:hover { color: var(--uni); }
 ::selection { background: var(--uni); color: var(--ink); }
-mark.hl { background-color: transparent; background-image: linear-gradient(var(--uni), var(--uni)); background-repeat: no-repeat; background-position: left center; background-size: 100% 100%; color: var(--ink); padding: .04em .12em; margin: 0 -.04em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
-.hlw { background-image: linear-gradient(var(--uni), var(--uni)); background-repeat: no-repeat; background-position: left center; background-size: 0% 100%; padding: .04em .08em; margin: 0 -.08em; }
-.hlw.on { background-size: 100% 100%; color: var(--ink); }
 h1, h2 { font-weight: 400; }
 
 @keyframes mtnDrift { from { transform: translateY(-5px); } to { transform: translateY(5px); } }
