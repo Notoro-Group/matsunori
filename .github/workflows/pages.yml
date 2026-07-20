@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: '23 6 * * *' # daily press-feed refresh (06:23 UTC)
+    - cron: '23 6 * * 1' # weekly press-feed refresh (Mondays 06:23 UTC)
   workflow_dispatch:
 
 permissions:
@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # On the daily schedule (or a manual run), re-bake the press archive.
+      # On the weekly schedule (or a manual run), re-bake the press archive.
       # The bake merges into the existing news-baked.json, so a run where
       # Google blocks datacenter egress can only add items, never lose them.
       # Deploy proceeds either way — worst case it ships the current archive.
