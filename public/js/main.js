@@ -169,11 +169,6 @@
         inner.style.transform = 'translateY(105%)';
         inner.style.transition = 'transform .85s ' + EASE;
         el._inner = inner;
-      } else if (kind === 'hl') {
-        // marker highlight: gold sweeps left-to-right, text flips to ink
-        el.style.backgroundSize = '0% 100%';
-        el.style.color = 'inherit';
-        el.style.transition = 'background-size .55s cubic-bezier(.7,0,.3,1), color .25s ease .22s';
       } else if (kind === 'words') {
         // split into masked words; words inside a <mark class="hl"> keep a
         // .hlw tag so the highlight can sweep them after the rise
@@ -190,7 +185,7 @@
           mask.style.cssText = 'display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.1em;margin-bottom:-.1em';
           var inner = document.createElement('span');
           inner.style.cssText = 'display:inline-block;transform:translateY(110%);transition:transform .6s ' + EASE + ' ' + (i * 60) + 'ms';
-          if (item.hl) inner.classList.add('hlw');
+          if (item.hl) { inner.classList.add('hlw'); inner.classList.add('on'); } // statically highlighted
           inner.textContent = item.w;
           mask.appendChild(inner);
           el.appendChild(mask);
@@ -229,13 +224,7 @@
       else if (kind === 'stamp') { el.style.opacity = '1'; el.style.transform = 'none'; }
       else if (kind === 'tracking') { el.style.opacity = '1'; el.style.letterSpacing = '.36em'; }
       else if (kind === 'mask-rise' && el._inner) { el._inner.style.transform = 'translateY(0)'; }
-      else if (kind === 'hl') { el.style.backgroundSize = '100% 100%'; el.style.color = '#0C0C0E'; }
-      else if (kind === 'words') {
-        $$('span > span', el).forEach(function (s) { s.style.transform = 'translateY(0)'; });
-        $$('.hlw', el).forEach(function (s, i) {
-          setTimeout(function () { s.classList.add('on'); }, 600 + i * 110);
-        });
-      }
+      else if (kind === 'words') { $$('span > span', el).forEach(function (s) { s.style.transform = 'translateY(0)'; }); }
     }, delay);
   }
 
