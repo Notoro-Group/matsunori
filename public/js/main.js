@@ -399,7 +399,7 @@
     galCard.addEventListener('pointercancel', galEnd);
   }
 
-  /* ============ news (live press mentions via /api/news) ============ */
+  /* ============ news (baked press archive at /data/news-baked.json) ============ */
 
   var newsSection = $('#news'), newsList = $('#news-list'), newsAllBtn = $('#news-all'), newsNote = $('#news-note');
   var newsModal = $('#news-modal'), newsBody = $('#news-modal-body');
@@ -484,7 +484,7 @@
 
   function loadNews() {
     if (!newsSection || !window.fetch) return;
-    fetch('/api/news').then(function (r) { return r.json(); }).then(function (data) {
+    fetch('/data/news-baked.json').then(function (r) { return r.json(); }).then(function (data) {
       newsItems = (data.items || []).filter(function (it) { return it && it.title && it.url; });
       if (!newsItems.length) {
         if (data.error) newsUnavailable();

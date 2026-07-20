@@ -1,0 +1,48 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '23 6 * * *' # daily press-feed refresh (06:23 UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # On the daily schedule (or a manual run), re-bake the press archive.
+      # The bake merges into the existing news-baked.json, so a run where
+      # Google blocks datacenter egress can only add items, never lose them.
+      # Deploy proceeds either way — worst case it ships the current archive.
+      - name: Refresh press feed
+        if: github.event_name != 'push'
+        run: |
+          node scripts/bake-news.mjs || echo "bake failed - deploying existing archive"
+          if ! git diff --quiet -I '"generated"' -- public/data/news-baked.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -am "Refresh baked press feed"
+            git push
+          fi
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - id: deployment
+        uses: actions/deploy-pages@v4

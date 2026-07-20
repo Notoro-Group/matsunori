@@ -4,13 +4,14 @@
    article's og:image / og:description, and write the result to
    public/data/news-baked.json.
 
-   Run from a residential connection — Google and several publishers refuse
-   Cloudflare's datacenter egress, which is exactly why this bake exists. The
-   deployed Worker overlays the live feed on top of this archive, so new
-   stories still appear immediately (with favicon fallbacks) and gain full
-   metadata on the next bake + deploy.
+   The bake merges into the previous news-baked.json: items that have dropped
+   out of the feeds stay in the archive, and already-resolved metadata is kept
+   when a publisher refuses a re-scrape. That makes it safe to run from
+   datacenter egress (GitHub Actions) — a partially-blocked run can only add,
+   never lose. Best results still come from a residential connection, where
+   Google's resolver and more publishers respond.
 
-   Usage: node scripts/bake-news.mjs   (then: wrangler deploy)
+   Usage: node scripts/bake-news.mjs   (then commit + deploy)
    Optional: scripts/news-fixups.json — [{match, exact?, url?, image?,
    snippet?}] applied to feed items by title substring, for stories whose
    publishers refuse resolution or scraping. */
@@ -162,6 +163,15 @@ function addItem(it) {
 }
 
 const report = [];
+// seed from the previous bake FIRST so its resolved URLs/metadata win the
+// dedupe and feed rows only fill in what's missing (gLink, fresher dates)
+if (existsSync(OUT)) {
+  try {
+    const prev = JSON.parse(readFileSync(OUT, 'utf8'));
+    (prev.items || []).forEach(addItem);
+    console.log('previous bake: ' + byKey.size + ' items');
+  } catch (e) { console.log('previous bake unreadable: ' + e.message); }
+}
 try {
   const bing = await fromBing();
   bing.forEach(addItem);
@@ -199,9 +209,11 @@ for (const it of byKey.values()) {
 }
 
 // scrape article metadata for every reachable publisher URL
+const finalize = (it) => ({ title: it.title, url: it.url, source: it.source, date: it.date || null, image: it.image || null, imageType: it.image ? 'article' : null, snippet: it.snippet || null });
 const items = [];
 for (const it of byKey.values()) {
   if (isGoogle(it.url)) { report.push('skipped (opaque): ' + it.title.slice(0, 50)); continue; }
+  if (it.image && it.snippet && it.source && it.date) { items.push(finalize(it)); continue; } // complete from a prior bake
   const meta = await scrape(it.url);
   if (meta) {
     if (meta.finalUrl && !isGoogle(meta.finalUrl)) it.url = meta.finalUrl;
@@ -213,7 +225,7 @@ for (const it of byKey.values()) {
     report.push('no og meta: ' + (it.title || it.url).slice(0, 50));
   }
   if (!it.source) it.source = hostOf(it.url);
-  items.push({ title: it.title, url: it.url, source: it.source, date: it.date || null, image: it.image || null, imageType: it.image ? 'article' : null, snippet: it.snippet || null });
+  items.push(finalize(it));
   await sleep(400);
 }
 
