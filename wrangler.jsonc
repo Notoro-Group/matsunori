@@ -3,6 +3,10 @@
   "name": "matsunori",
   "main": "src/worker.js",
   "compatibility_date": "2026-06-01",
+  "routes": [
+    { "pattern": "matsunori.com", "custom_domain": true },
+    { "pattern": "www.matsunori.com", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./public",
     "binding": "ASSETS"
