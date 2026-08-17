@@ -1,6 +1,24 @@
 {
- "generated": "2026-08-10T08:10:36.762Z",
+ "generated": "2026-08-17T07:28:37.995Z",
  "items": [
+  {
+   "title": "Matsunori opening at MarketStreet in Lynnfield this September",
+   "url": "https://www.wickedlocal.com/videos/entertainment/dining/2026/08/14/japanese-restaurant-matsunori-coming-to-lynnfield-this-september/91271707007/",
+   "source": "Wicked Local",
+   "date": "2026-08-14T08:47:01.000Z",
+   "image": null,
+   "imageType": null,
+   "snippet": null
+  },
+  {
+   "title": "Japanese eatery known for its sushi handrolls plans Lynnfield opening",
+   "url": "https://www.yahoo.com/news/us/articles/japanese-eatery-known-sushi-handrolls-084713032.html",
+   "source": "Yahoo",
+   "date": "2026-08-14T01:47:00.000Z",
+   "image": "https://s.yimg.com/lo/mysterio/api/462237468f335bcc2465c64ea888be6ff8e1e70b6526fdc956a1fd4e20e23715/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_jpg/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fwicked_local_articles_916%2F245b2c988a77fb7e364785ba104c5cd3.jpg",
+   "imageType": "article",
+   "snippet": "Liu is founder of Matsunori, a contemporary Japanese handroll concept that launched in Fenway in 2023 and later expanded to Long Island City, New York. He plans to open the brand's first suburban ..."
+  },
   {
    "title": "Popular Boston sushi spot to open North Shore location. How to eat there",
    "url": "https://www.yahoo.com/lifestyle/articles/popular-boston-sushi-spot-open-152341382.html",
@@ -56,15 +74,6 @@
    "snippet": "Warm up with bentos or get into hand rolls at this new Japanese eatery."
   },
   {
-   "title": "Kevin Liu loved eating at restaurants, so he figured: Why not open a few?",
-   "url": "https://www.bostonglobe.com/2025/09/08/lifestyle/mai-japanese-food-seaport/",
-   "source": "The Boston Globe",
-   "date": "2025-09-09T07:00:00.000Z",
-   "image": "https://bostonglobe-prod.cdn.arcpublishing.com/resizer/v2/JK7X33Z47BECJIR5G3QPUXJW5I.jpeg?auth=04a42d7231bef42bcf94b2b389eaf9903b4d1db4b2dff36f71294b675f4f2b33&width=1440",
-   "imageType": "article",
-   "snippet": "His newest spot, Mai, brings affordable Japanese food to the Seaport."
-  },
-  {
    "title": "Authentic, affordable Japanese eatery with ‘homemade touch’ opens in Boston",
    "url": "https://www.masslive.com/destinations/2025/09/authentic-affordable-japanese-eatery-with-homemade-touch-opens-in-boston.html",
    "source": "MassLive",
@@ -72,6 +81,15 @@
    "image": "https://www.masslive.com/resizer/v2/X53C75BYXJDOTG6XSZY6BXU6BY.jpg?auth=c1346af9d13fb5ac6df3a2d2c3d76b9d74ae52adf5c2ecc0420e7afe96715d0d&width=1280&smart=true&quality=90",
    "imageType": "article",
    "snippet": "Everything from the caviar-topped chicken nuggets to the Japanese Steak Frites is made with premium ingredients."
+  },
+  {
+   "title": "Kevin Liu loved eating at restaurants, so he figured: Why not open a few?",
+   "url": "https://www.bostonglobe.com/2025/09/08/lifestyle/mai-japanese-food-seaport/",
+   "source": "The Boston Globe",
+   "date": "2025-09-09T07:00:00.000Z",
+   "image": "https://bostonglobe-prod.cdn.arcpublishing.com/resizer/v2/JK7X33Z47BECJIR5G3QPUXJW5I.jpeg?auth=04a42d7231bef42bcf94b2b389eaf9903b4d1db4b2dff36f71294b675f4f2b33&width=1440",
+   "imageType": "article",
+   "snippet": "His newest spot, Mai, brings affordable Japanese food to the Seaport."
   },
   {
    "title": "Matsunori Handroll Bar - Review - Long Island City - New York",
